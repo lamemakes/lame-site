@@ -7,6 +7,7 @@
     v-model:picName="this.picParam"
     v-model:imgDirectoryIn="this.imgDirectory"
     v-model:picSelect="this.picSelect"
+    v-model:parentName="this.parentName"
   />
 </template>
 <script>
@@ -19,6 +20,7 @@ export default {
     return {
       picParam: "",
       imgDirectory: imgDirectory,
+      parentName: "pics",
     };
   },
   methods: {

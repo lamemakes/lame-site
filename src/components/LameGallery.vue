@@ -21,7 +21,7 @@
 import LameLiteBox from "./LameLiteBox.vue";
 
 export default {
-  props: ["picName", "imgDirectoryIn", "picSelect"],
+  props: ["picName", "imgDirectoryIn", "picSelect", "parentName"],
   data() {
     return {
       imgDirectory: this.imgDirectoryIn,
@@ -34,10 +34,18 @@ export default {
     // Give name of picture, along with boolean of thumbnail = true/false to indicate directory needed.
     getSrc(name, thumbnail) {
       try {
-        var images = thumbnail
-          ? require.context("../assets/pictures/thumbnails/", false)
-          : require.context("../assets/pictures/full/", false);
-        return images("./" + name);
+        var images;
+        if (this.parentName === "pics") {
+          images = thumbnail
+            ? require.context("../assets/pictures/thumbnails/", false)
+            : require.context("../assets/pictures/full/", false);
+          return images("./" + name);
+        } else if (this.parentName === "project") {
+          images = thumbnail
+            ? require.context("../assets/projects/pictures/thumbnails/", false)
+            : require.context("../assets/projects/pictures/full/", false);
+          return images("./" + name);
+        }
       } catch (e) {
         console.log(e);
         return "";
@@ -50,34 +58,27 @@ export default {
     },
     passPicNav(navParam) {
       console.log("passPicNav: " + navParam);
-      this.liteBoxPicNav = navParam;
+      this.picSelect(navParam);
       this.liteBox = false;
     },
   },
   created() {
+    console.log("PARENT: " + this.parentName);
     if (this.picName != "" && typeof this.picName === "string") {
-      console.log("CREATED LITEBOX CALLED");
       this.showLiteBox(this.imgDirectory[this.picName]);
     }
   },
   watch: {
     picName: function () {
-      console.log("PICNAME: '" + this.picName + "'");
-      console.log("TYPE PICNAME " + typeof this.picName);
       if (
-        this.picName &&
+        this.picName != "false" &&
         this.picName != "" &&
         typeof this.picName === "string"
       ) {
-        console.log("WATCH LITEBOX CALLED");
         this.showLiteBox(this.imgDirectory[this.picName]);
       } else {
         this.liteBox = false;
       }
-    },
-    liteBoxPicNav: function () {
-      console.log("LITE BOX PIC NAV: " + this.liteBoxPicNav);
-      this.picSelect(this.liteBoxPicNav);
     },
   },
   components: { LameLiteBox },

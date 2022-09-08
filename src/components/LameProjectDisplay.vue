@@ -11,6 +11,7 @@
           v-model:picName="this.picParam"
           v-model:imgDirectoryIn="this.imgDirectory"
           v-model:picSelect="this.picSelect"
+          v-model:parentName="this.parentName"
         />
       </div>
     </div>
@@ -27,6 +28,8 @@ export default {
       picParam: "",
       project: projects[this.projName],
       imgDirectory: projects[this.projName].imgDirectory,
+      imgPath: "../assets/projects/",
+      parentName: "project",
     };
   },
   methods: {
@@ -40,12 +43,7 @@ export default {
       }
     },
     picSelect(image) {
-      console.log("PIC SELECT: " + image);
-      if (image) {
-        this.picParam = image;
-      } else {
-        this.picParam = "";
-      }
+      this.picParam = image;
     },
   },
   created() {

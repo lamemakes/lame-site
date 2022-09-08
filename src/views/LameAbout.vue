@@ -86,7 +86,7 @@ export default {
 }
 
 #about-info > p {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   padding-left: 20px;
   padding-top: 5%;
 }
@@ -141,12 +141,14 @@ export default {
   }
 
   #me-pic {
-    padding-bottom: 20px;
+    padding-bottom: 0px;
     justify-self: center;
   }
 
   .contact-btn {
     margin: 5px;
+    width: 85px;
+    height: 85px;
   }
 }
 

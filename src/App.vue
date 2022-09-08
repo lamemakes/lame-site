@@ -144,13 +144,26 @@ header {
 .proj-pg {
   font-size: 1.25rem;
   text-align: left;
-  word-wrap: break-word;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
   padding-bottom: 22px;
   color: white;
+}
+
+.proj-writeup a {
+  text-decoration: none;
+  color: #fb8b37;
+}
+
+.sub-heading {
+  display: block;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.list-item {
+  text-indent: -12px;
+  padding-bottom: 12px;
+  padding-left: 40px;
 }
 
 /** ==============
@@ -163,6 +176,15 @@ header {
 @media (min-width: 0px) and (max-width: 850px) {
   #app {
     background-image: url("@/assets/backgrounds/Mobile_Background.jpg");
+  }
+
+  .proj-pg {
+    font-size: 1.15rem;
+  }
+
+  .list-item {
+    /* text-indent: -12px; */
+    padding-left: 20px;
   }
 }
 </style>

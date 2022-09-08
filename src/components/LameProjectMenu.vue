@@ -29,7 +29,10 @@ export default {
   methods: {
     getSrc(name) {
       try {
-        var images = require.context("../assets/projects/thumbnails/", false);
+        var images = require.context(
+          "../assets/projects/pictures/thumbnails/",
+          false
+        );
         return images("./" + name);
       } catch (e) {
         console.log(e);
