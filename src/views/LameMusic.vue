@@ -22,12 +22,18 @@ export default {};
 .playlist {
   display: flex;
   justify-content: center;
-  background: url(@/assets/loading/colorful_load.gif) center center no-repeat;
-  background-size: 5%;
+  background: url(@/assets/loading/lame_load.gif) center center no-repeat;
+  background-size: 30%;
 }
 
 .playlist > iframe {
   width: 25%;
   min-width: 300px;
+}
+
+@media (min-width: 0px) and (max-width: 850px) {
+  .playlist {
+    background-size: 60%;
+  }
 }
 </style>

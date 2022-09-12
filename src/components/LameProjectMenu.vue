@@ -3,6 +3,21 @@
     <ul>
       <li v-for="project in projects" :key="project.name.replace(' ', '_')">
         <router-link
+          @click="this.comingSoonAlert()"
+          v-if="project.name == 'STEROIDS'"
+          :to="{ name: 'projects' }"
+        >
+          <div class="proj-thumbnail">
+            <img :src="getSrc(project.thumbnail)" />
+          </div>
+          <div class="proj-info">
+            <h2>{{ project.displayName.toUpperCase() }}</h2>
+            <span class="proj-date">{{ project.date }}</span>
+            <span class="proj-desc">{{ project.desc }}</span>
+          </div>
+        </router-link>
+        <router-link
+          v-if="project.name != 'STEROIDS'"
           :to="{ name: 'projects', params: { projectName: project.name } }"
         >
           <div class="proj-thumbnail">
@@ -58,6 +73,11 @@ export default {
     dateSortProjects() {
       this.projects.sort((a, b) => new Date(a.date) - new Date(b.date));
       this.projects.reverse();
+    },
+    comingSoonAlert() {
+      alert(
+        "STEROIDS: A LAMAR INGRAHAM COLLECTION is coming soon! Check back later for some dope shit ;)"
+      );
     },
   },
   created() {
