@@ -1,95 +1,61 @@
 <template>
-  <div id="gallery-container">
-    <div id="gallery">
-      <div
-        v-for="(image, index) in imgDirectory"
-        :key="index"
-        @click="this.picSelect(image.name)"
-      >
-        <img :src="getSrc(image.thumbnail, true)" />
-      </div>
+  <LameLiteBox
+    id="lite-box"
+    v-if="openLiteBox"
+    :imageArray="imageArray"
+    :selectedIndex="selectedIndex"
+  />
+  <div id="gallery">
+    <div
+      v-for="(image, index) in imageArray"
+      :key="image.url"
+      @click="selectImg(index)"
+    >
+      <img :src="image.url" />
     </div>
   </div>
-  <LameLiteBox
-    v-if="this.liteBox !== false"
-    v-model:liteBoxIn="this.liteBox"
-    v-model:imgDirectoryIn="this.imgDirectory"
-    v-model:passPicNav="this.passPicNav"
-  />
 </template>
-<script>
+
+<script lang="ts">
+import type { Image } from "../types/image.interface";
+import type { PropType } from "vue";
+import { defineComponent, nextTick, ref } from "vue";
 import LameLiteBox from "./LameLiteBox.vue";
 
-export default {
-  props: ["picName", "imgDirectoryIn", "picSelect", "parentName"],
-  data() {
-    return {
-      imgDirectory: this.imgDirectoryIn,
-      liteBox: false,
-      liteBoxPicName: this.picName,
-      liteBoxPicNav: String,
-    };
+export default defineComponent({
+  components: {
+    LameLiteBox,
   },
-  methods: {
-    // Give name of picture, along with boolean of thumbnail = true/false to indicate directory needed.
-    getSrc(name, thumbnail) {
-      try {
-        var images;
-        if (this.parentName === "pics") {
-          images = thumbnail
-            ? require.context("../assets/pictures/thumbnails/", false)
-            : require.context("../assets/pictures/full/", false);
-          return images("./" + name);
-        } else if (this.parentName === "project") {
-          images = thumbnail
-            ? require.context("../assets/projects/pictures/thumbnails/", false)
-            : require.context("../assets/projects/pictures/full/", false);
-          return images("./" + name);
-        }
-      } catch (e) {
-        console.log(e);
-        return "";
-      }
-    },
-    showLiteBox(image) {
-      console.log(JSON.stringify(image));
-      image.imgSrc = this.getSrc(image.name);
-      this.liteBox = image;
-    },
-    passPicNav(navParam) {
-      console.log("passPicNav: " + navParam);
-      this.picSelect(navParam);
-      this.liteBox = false;
+  props: {
+    imageArray: {
+      required: true,
+      type: Array as PropType<Array<Image>>,
     },
   },
-  created() {
-    console.log("PARENT: " + this.parentName);
-    if (this.picName != "" && typeof this.picName === "string") {
-      this.showLiteBox(this.imgDirectory[this.picName]);
-    }
-  },
-  watch: {
-    picName: function () {
-      if (
-        this.picName != "false" &&
-        this.picName != "" &&
-        typeof this.picName === "string"
-      ) {
-        this.showLiteBox(this.imgDirectory[this.picName]);
-      } else {
-        this.liteBox = false;
-      }
-    },
-  },
-  components: { LameLiteBox },
-};
-</script>
-<style scoped>
-#gallery-container {
-  display: flex;
-  justify-content: center;
-}
+  setup(props) {
+    const imageArray = ref(props.imageArray);
 
+    // Values for the LiteBox
+    const openLiteBox = ref(false);
+    const selectedIndex = ref(0);
+
+    const selectImg = async (index: number): Promise<void> => {
+      // If the LiteBox is open, wait for it to close & open the new image
+      if (openLiteBox.value) {
+        openLiteBox.value = false;
+        await nextTick();
+      }
+
+      selectedIndex.value = index;
+      openLiteBox.value = true;
+    };
+
+    return { imageArray, openLiteBox, selectedIndex, selectImg };
+  },
+});
+</script>
+
+<style scoped lang="scss">
 #gallery {
   line-height: 0;
   -webkit-column-count: 3; /* split it into 2 columns */
@@ -99,17 +65,17 @@ export default {
   column-count: 3;
   column-gap: 20px;
   width: 75%;
-}
 
-#gallery img {
-  width: 100% !important;
-  height: auto !important;
-  margin-bottom: 20px; /* to match column gap */
-}
+  img {
+    width: 100% !important;
+    height: auto !important;
+    margin-bottom: 20px; /* to match column gap */
+  }
 
-#gallery img:hover,
-#gallery img:focus {
-  filter: grayscale(100%);
+  img:hover,
+  img:focus {
+    filter: grayscale(100%);
+  }
 }
 
 @media (min-width: 0px) and (max-width: 850px) {

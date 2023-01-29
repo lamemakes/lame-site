@@ -1,48 +1,117 @@
-<template lang="">
-  <div v-if="!projParam" class="title-desc">
-    <h1>Projects</h1>
+<template>
+  <LameProjectDisplay v-if="selectedProject" :project="selectedProject" />
+  <div v-else>
+    <div class="title-desc">
+      <h1 class="heading">Projects</h1>
+    </div>
+    <div class="list-container">
+      <div
+        v-for="project in projects"
+        :key="project.id"
+        class="project-container"
+      >
+        <LameProjectMenuItem :project="project" />
+      </div>
+    </div>
   </div>
-  <LameProjectMenu v-if="!projParam" v-model:lameProjects="this.projects" />
-  <LameProjectDisplay v-if="projParam" v-model:projName="this.projParam" />
 </template>
-<script>
-import LameProjectMenu from "@/components/LameProjectMenu.vue";
-import LameProjectDisplay from "@/components/LameProjectDisplay.vue";
-import lameProjects from "@/assets/projects/projects.json";
 
-export default {
+<script lang="ts">
+import { defineComponent, ref, inject, watch } from "vue";
+import LameProjectMenuItem from "../components/LameProjectItem.vue";
+import LameProjectDisplay from "../components/LameProjectDisplay.vue";
+import dateUtils from "../utils/date";
+
+import type { Project } from "../types/projects.interface";
+import { useRoute } from "vue-router";
+
+export default defineComponent({
+  name: "LameProjects",
   components: {
-    LameProjectMenu,
+    LameProjectMenuItem,
     LameProjectDisplay,
   },
-  data: function () {
-    return {
-      projects: lameProjects,
+  setup() {
+    const host = inject("host");
+    const projectsEndpoint = host + "/projects.json";
+
+    const projects = ref([] as Project[]);
+
+    // Pull projects from projects.json static file (auto generated)
+    const loadProjects = async (): Promise<void> => {
+      try {
+        const data = await fetch(projectsEndpoint);
+        if (!data.ok) {
+          throw Error("Failed to get project data!");
+        }
+        let temp_projects = await data.json();
+        projects.value = dateUtils.sortProjectDates(temp_projects.projects);
+      } catch (error) {
+        console.error(error);
+        projects.value = [];
+      }
     };
+
+    const getProjectById = (id: string): Project | undefined => {
+      var project: Project | undefined = undefined;
+      projects.value.forEach((proj) => {
+        if (proj.id == id) {
+          project = proj;
+        }
+      });
+      return project;
+    };
+
+    const updateSelectedProjects = (): void => {
+      selectedProject.value = currentParams.value
+        ? getProjectById(currentParams.value)
+        : undefined;
+    };
+
+    // Handling project IDs
+    const route = useRoute();
+    const currentParams = ref(route.params.projectId?.toString());
+    const selectedProject = ref<Project | undefined>(undefined);
+
+    watch(
+      route,
+      (to) => {
+        currentParams.value = to.params.projectId?.toString();
+        selectedProject.value = currentParams.value
+          ? getProjectById(currentParams.value)
+          : undefined;
+      },
+      { flush: "pre", immediate: true, deep: true }
+    );
+
+    // The projects will load after params are specified. When this update happens, confirm the can see the selected project.
+    watch(projects, () => {
+      if (currentParams) updateSelectedProjects();
+    });
+
+    // load the projects
+    loadProjects();
+
+    return { projects, selectedProject };
   },
-  methods: {},
-  created() {
-    if (
-      this.$route.params.projectName != "" &&
-      typeof this.$route.params.projectName != "undefined"
-    ) {
-      this.projParam = this.$route.params.projectName;
-      console.log("CREATED PROJ PARAM: " + this.projParam);
-    } else {
-      this.projParam = false;
-    }
-  },
-  beforeRouteUpdate(to) {
-    if (
-      to.params.projectName != "" &&
-      typeof to.params.projectName != "undefined"
-    ) {
-      this.projParam = to.params.projectName;
-      console.log("BRU PROJ PARAMII: " + this.projParam);
-    } else {
-      this.projParam = false;
-    }
-  },
-};
+});
 </script>
-<style></style>
+
+<style scoped lang="scss">
+.list-container {
+  width: 100%;
+  display: inline-grid;
+  justify-items: center;
+}
+.project-container {
+  display: grid;
+  justify-items: center;
+  width: 60%;
+}
+
+@media (min-width: 0px) and (max-width: 850px) {
+  .project-container {
+    width: 80%;
+  }
+}
+</style>

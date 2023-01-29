@@ -1,23 +1,57 @@
-<template lang="">
+<template>
   <nav>
     <div id="nav-logo">
       <router-link :to="{ name: 'projects' }">
-        <img src="@/assets/logos/lamemakes_nav_logo.png" id="nav-logo-img" />
+        <img id="nav-logo-img" src="@/assets/logos/lamemakes_nav_logo.png" />
       </router-link>
     </div>
     <div id="nav-bar">
       <ul>
-        <li><router-link :to="{ name: 'projects' }">Projects</router-link></li>
-        <li><router-link :to="{ name: 'pics' }">Pics</router-link></li>
-        <li><router-link :to="{ name: 'music' }"> Music</router-link></li>
-        <li><router-link :to="{ name: 'about' }">About</router-link></li>
+        <li v-for="route in ROUTES" :key="route">
+          <router-link
+            :class="
+              currentRoute == route
+                ? 'router-link-active router-link-exact-active'
+                : ''
+            "
+            :to="{ name: route }"
+          >
+            {{ route.charAt(0).toUpperCase() + route.slice(1) }}</router-link
+          >
+        </li>
       </ul>
     </div>
   </nav>
 </template>
-<script>
-export default {};
+
+<script lang="ts">
+import { defineComponent, onMounted, ref, watch } from "vue";
+import { useRoute } from "vue-router";
+
+export default defineComponent({
+  setup() {
+    const ROUTES = ["projects", "pics", "music", "about"];
+
+    const route = useRoute();
+    const currentRoute = ref(route.name?.toString());
+
+    watch(
+      route,
+      (to) => {
+        currentRoute.value = to.name?.toString();
+      },
+      { flush: "pre", immediate: true, deep: true }
+    );
+
+    onMounted(() => {
+      currentRoute.value = route.name?.toString();
+    });
+
+    return { ROUTES, currentRoute };
+  },
+});
 </script>
+
 <style scoped>
 /** ==============
     Navigation Bar

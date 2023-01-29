@@ -1,48 +1,55 @@
 <template>
   <div class="title-desc">
-    <h1>Some Flicks</h1>
-    <p>All were taken/created by me unless stated otherwise</p>
+    <h1 class="heading">Flicks</h1>
+    <p class="sub-heading">Taken/Created By Me Unless Stated Otherwise</p>
   </div>
-  <LameGallery
-    v-model:picName="this.picParam"
-    v-model:imgDirectoryIn="this.imgDirectory"
-    v-model:picSelect="this.picSelect"
-    v-model:parentName="this.parentName"
-  />
+  <div id="gallery-container">
+    <LameGallery v-if="pics.length > 0" :imageArray="pics" />
+  </div>
 </template>
-<script>
-import LameGallery from "@/components/LameGallery.vue";
-import imgDirectory from "@/assets/pictures/imgDirectory.json";
 
-export default {
-  components: { LameGallery },
-  data: function () {
-    return {
-      picParam: "",
-      imgDirectory: imgDirectory,
-      parentName: "pics",
-    };
+<script lang="ts">
+import { defineComponent, inject, ref } from "vue";
+import type { Image } from "../types/image.interface";
+import LameGallery from "../components/LameGallery.vue";
+
+export default defineComponent({
+  components: {
+    LameGallery,
   },
-  methods: {
-    picSelect(image) {
-      console.log("picSelect: " + image);
-      if (image) {
-        this.$router.push({ path: `/pics/${image}` });
-      } else {
-        this.$router.push({ path: `/pics/` });
+  setup() {
+    const host = inject("host");
+    const picsEndpoint = host + "/imgs.json";
+
+    const pics = ref([] as Image[]);
+
+    // Pull pics from pics.json static file (auto generated)
+    const loadpics = async (): Promise<void> => {
+      try {
+        const data = await fetch(picsEndpoint);
+        if (!data.ok) {
+          throw Error("Failed to get project data!");
+        }
+        pics.value = await data.json();
+      } catch (error) {
+        console.error(error);
+        pics.value = [];
       }
-    },
+    };
+
+    loadpics();
+
+    return { pics };
   },
-  created() {
-    this.picParam = this.$route.params.picName;
-    console.log("CREATED PIC PARAMII: " + this.picParam);
-  },
-  beforeRouteUpdate(to) {
-    this.picParam = to.params.picName;
-    console.log("PIC PARAMII: " + this.picParam);
-    //console.log("from: " + from);
-    //console.log("next: " + next);
-  },
-};
+});
 </script>
-<style lang=""></style>
+<style scoped lang="scss">
+#gallery-container {
+  width: 100%;
+  justify-items: center;
+  display: grid;
+  div {
+    width: 80%;
+  }
+}
+</style>

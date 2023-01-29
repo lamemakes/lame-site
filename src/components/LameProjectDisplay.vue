@@ -1,114 +1,320 @@
 <template>
-  <div class="proj-page">
-    <div class="proj-display">
-      <div class="title-desc">
-        <h1 id="proj-heading">{{ project.displayName }}</h1>
-        <p id="proj-date">{{ project.date }}</p>
+  <div class="project-page">
+    <div class="project-display lame-box">
+      <div id="project-heading">
+        <router-link :to="{ name: 'projects' }" id="project-back">
+          <img src="@/assets/buttons/back.png" />
+        </router-link>
+        <div id="project-title">
+          <h1 class="heading" id="project-name">{{ project.name }}</h1>
+          <p class="sub-heading" id="project-date">{{ formDate }}</p>
+        </div>
+        <div id="header-spacer"></div>
       </div>
-      <div class="proj-details">
-        <div v-html="project.writeup" class="proj-writeup"></div>
-        <LameGallery
-          v-model:picName="this.picParam"
-          v-model:imgDirectoryIn="this.imgDirectory"
-          v-model:picSelect="this.picSelect"
-          v-model:parentName="this.parentName"
-        />
+      <div id="project-info">
+        <div v-html="project.description" id="project-description"></div>
+        <div v-html="project.details" id="project-details"></div>
+      </div>
+      <div id="project-links" v-if="project.links.length > 0">
+        <h2>Links</h2>
+        <ul>
+          <li
+            v-for="link in project.links"
+            :key="link.title"
+            class="link-container"
+          >
+            <a :href="link.url" target="_blank" class="link-item">
+              <div class="link-icon-container">
+                <img :src="getLinkIcon(link.type)" class="link-icon" />
+              </div>
+              <span class="link-title">{{ link.title }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div v-if="project.images.length > 0" id="project-gallery">
+        <h2>Gallery</h2>
+        <LameGallery :imageArray="imageArray" />
       </div>
     </div>
   </div>
 </template>
-<script>
-import projects from "@/assets/projects/projects.json";
-import LameGallery from "./LameGallery.vue";
 
-export default {
-  props: ["projName"],
-  data() {
-    return {
-      picParam: "",
-      project: projects[this.projName],
-      imgDirectory: projects[this.projName].imgDirectory,
-      imgPath: "../assets/projects/",
-      parentName: "project",
+<script lang="ts">
+import type { Project } from "../types/projects.interface";
+import type { Image } from "../types/image.interface";
+import type { PropType } from "vue";
+import { inject } from "vue";
+import LameGallery from "./LameGallery.vue";
+import { defineComponent, ref } from "vue";
+import dateUtils from "../utils/date";
+
+export default defineComponent({
+  components: {
+    LameGallery,
+  },
+  props: {
+    project: {
+      required: true,
+      type: Object as PropType<Project>,
+    },
+  },
+  setup(props) {
+    const host = inject("host");
+
+    const project = ref(props.project);
+
+    // Format date to pretty string
+    const formDate = dateUtils.getPrettyDate(new Date(project.value.date));
+
+    // Filter out the cover image from the gallery if specified
+    const filterCoverImage = (image: Image, index: number) => {
+      return index != project.value.coverImageIndex;
     };
-  },
-  methods: {
-    getSrc(name) {
-      try {
-        var images = require.context("../assets/projects/", false);
-        return images("./" + this.project.name + "/" + name);
-      } catch (e) {
-        console.log(e);
-        return "";
+
+    const getLinkIcon = (type: string) => {
+      const imageEndpoint = host + "/imgs/logos/";
+
+      switch (type) {
+        case "github":
+        case "hackaday":
+        case "instagram":
+          return imageEndpoint + type + ".png";
+        default:
+          return imageEndpoint + "internet.png"; // If logo isn't a recognized type, give a default image
       }
-    },
-    picSelect(image) {
-      this.picParam = image;
-    },
+    };
+
+    const imageArray = !project.value.coverInDisplay
+      ? project.value.images.filter(filterCoverImage)
+      : project.value.images;
+
+    // Auto-populate the hackaday link if the id is of type number & the link doesn't already exist in the link array.
+    const hackadayProjectUrl = "https://hackaday.io/project/";
+    if (
+      typeof project.value.hackaday.id === "number" &&
+      project.value.links.filter(
+        (link) =>
+          link.type === "hackaday" &&
+          link.url === hackadayProjectUrl + project.value.hackaday.id
+      ).length === 0
+    ) {
+      project.value.links.push({
+        title: project.value.name + " on Hackaday.io",
+        type: "hackaday",
+        url: hackadayProjectUrl + project.value.hackaday.id,
+      });
+    }
+
+    return { project, formDate, imageArray, getLinkIcon };
   },
-  created() {
-    console.log("IMG DIR: " + JSON.stringify(this.imgDirectory));
-  },
-  components: { LameGallery },
-};
+});
 </script>
-<style scoped>
-.proj-page {
+
+<style scoped lang="scss">
+.project-page {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.proj-display {
+.project-display {
   display: flex;
   flex-direction: column;
   justify-content: center;
   grid-template-columns: 100%;
-  margin-top: 15px;
   width: 60%;
-  background-color: rgba(43, 43, 43, 0.8);
   padding: 15px;
   border-radius: 20px;
+  :deep(h2) {
+    text-align: center;
+    padding-bottom: 8px;
+    font-size: 20px;
+    line-height: 1.1;
+    color: var(--head-color);
+  }
 }
 
-.proj-thumb {
-  float: right;
-  width: 50%;
-}
-
-.title-desc > h1 {
-  color: #42b983;
-}
-
-.title-desc > p {
-  font-size: 1.5em;
+#project-heading {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  padding-bottom: 15px;
+  padding-top: 10px;
   border-bottom: solid 5px #cbcbcb;
+  margin-bottom: 20px;
 }
 
-.proj-writeup {
-  padding-top: 20px;
+#project-title {
+  h1 {
+    color: #42b983;
+  }
+
+  p {
+    font-size: 22px;
+  }
 }
 
-/* .title-desc > p {
-  font-size: 1.4rem;
-  font-weight: bold;
-} */
+#project-description {
+  text-align: center;
+}
 
+// Format URLs
+:deep(a) {
+  text-decoration: none;
+  color: #fb8b37;
+}
+
+:deep(a):hover {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
+
+// Formatting of the details & description. Couldn't find an easier way to apply the CSS to the vue rendered HTML that wasn't painstakingly addding :deep() to all
+// CSS props pulled from TipTap's example editor: https://tiptap.dev/examples/default (what is used in the previously mentioned admin-panel)
+#project-description,
+#project-details {
+  font-size: 18px;
+  margin-bottom: 15px;
+
+  :deep(p) {
+    text-align: left;
+    font-size: 18px;
+    margin-bottom: 22px;
+    color: var(--head-color);
+  }
+
+  :deep(ul),
+  :deep(ol) {
+    padding-left: 55px;
+    padding-right: 55px;
+  }
+
+  :deep(h1),
+  :deep(h2),
+  :deep(h3),
+  :deep(h4),
+  :deep(h5),
+  :deep(h6) {
+    line-height: 1.1;
+  }
+
+  :deep(code) {
+    background-color: rgba(#616161, 0.1);
+    color: #616161;
+  }
+
+  :deep(pre) {
+    background: #0d0d0d;
+    color: #fff;
+    font-family: "JetBrainsMono", monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+
+    :deep(code) {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.8rem;
+    }
+  }
+
+  :deep(img) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  :deep(blockquote) {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(#0d0d0d, 0.1);
+  }
+
+  :deep(hr) {
+    border: none;
+    border-top: 2px solid rgba(#0d0d0d, 0.1);
+    margin: 2rem 0;
+  }
+}
+
+#project-description {
+  :deep(p) {
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+// Formatting for the project gallery
+#project-gallery {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+}
+
+// Formatting for the back button to go back to the project menu
+#project-back {
+  width: 35px;
+  height: 35px;
+  align-items: center;
+  background-color: #006fd2;
+  border-radius: 50%;
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+  padding: 5px;
+  display: flex;
+}
+
+#project-back:active,
+#project-back:hover {
+  -webkit-filter: invert(0%);
+  filter: invert(0%);
+}
+
+#project-back > img {
+  width: 100%;
+}
+
+#project-links {
+  justify-items: center;
+  display: grid;
+  margin-bottom: 20px;
+}
+
+.link-container {
+  display: flex;
+  margin-bottom: 10px;
+  a {
+    display: flex;
+    align-items: center;
+  }
+  .link-icon-container {
+    height: 24px;
+    width: 24px;
+    display: inline-block;
+    img {
+      width: 100%;
+    }
+  }
+  .link-title {
+    padding-top: 5px;
+    padding-left: 5px;
+  }
+}
+
+// Mobile layout
 @media (min-width: 0px) and (max-width: 850px) {
-  .proj-display {
+  .project-display {
     width: 95%;
   }
 
-  .proj-display p {
+  .project-display p {
     font-size: 1rem;
   }
 
-  #proj-writeup {
+  #project-writeup {
     line-height: 22px;
     text-indent: 45px;
   }
 
-  #proj-writeup > p {
+  #project-writeup > p {
     margin-bottom: 22px;
   }
 }
