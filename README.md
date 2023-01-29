@@ -31,12 +31,6 @@ This lets Apache know to only allow CORS for JSON files.
 yarn dev
 ```
 
-## Build for production
-
-```sh
-yarn build
-```
-
 ## Run Unit Tests with [Vitest](https://vitest.dev/)
 
 ```sh
@@ -53,6 +47,12 @@ yarn prettier . --write
 
 ```sh
 yarn lint
+```
+
+## Build for production
+
+```sh
+yarn build
 ```
 
 ## Notes
