@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <img id="main-img" :src="imageArray[imageIndex].url" />
+    <LameImage :imageUrl="imageArray[imageIndex].url" />
     <!-- TODO: Why two divs? -->
     <div v-if="imageArray[imageIndex].caption" id="pic-caption">
       <!-- <p class="caption-quote">"</p> -->
@@ -32,6 +32,7 @@
 <script lang="ts">
 import type { Image } from "../types/image.interface";
 import type { PropType, Ref } from "vue";
+import LameImage from "./LameImage.vue";
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
@@ -44,6 +45,9 @@ export default defineComponent({
       required: true,
       type: Number,
     },
+  },
+  components: {
+    LameImage
   },
   setup(props) {
     const imageArray = ref(props.imageArray);
@@ -156,10 +160,6 @@ export default defineComponent({
 
 #next-pic {
   justify-self: right;
-}
-
-#prev-pic {
-  justify-self: left;
 }
 
 #pic-caption {

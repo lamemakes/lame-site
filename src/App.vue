@@ -10,6 +10,7 @@
 import { defineComponent, ref } from "vue";
 import LameDesktopNav from "./components/LameDesktopNav.vue";
 import LameMobileNav from "./components/LameMobileNav.vue";
+import viewUtils from "./utils/view";
 
 export default defineComponent({
   provides: ["host"],
@@ -20,15 +21,9 @@ export default defineComponent({
   setup() {
     const DESKTOP_MIN_WIDTH = 850; // Value used before switching to mobile view
 
-    const mobileView = ref(false);
+    const mobileView = ref(viewUtils.isMobileView());
 
-    const handleView = () => {
-      mobileView.value = window.innerWidth <= DESKTOP_MIN_WIDTH;
-    };
-
-    handleView();
-
-    window.addEventListener("resize", handleView);
+    window.addEventListener("resize", () => {mobileView.value = viewUtils.isMobileView()});
 
     return { mobileView };
   },

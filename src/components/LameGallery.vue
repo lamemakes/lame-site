@@ -11,7 +11,7 @@
       :key="image.url"
       @click="selectImg(index)"
     >
-      <img :src="image.url" />
+      <LameImage :imageUrl="image.url" :thumbnail="true"/>
     </div>
   </div>
 </template>
@@ -21,10 +21,12 @@ import type { Image } from "../types/image.interface";
 import type { PropType } from "vue";
 import { defineComponent, nextTick, ref } from "vue";
 import LameLiteBox from "./LameLiteBox.vue";
+import LameImage from "./LameImage.vue";
 
 export default defineComponent({
   components: {
     LameLiteBox,
+    LameImage
   },
   props: {
     imageArray: {
