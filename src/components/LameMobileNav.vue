@@ -5,7 +5,7 @@
     </div>
     <div id="nav-logo">
       <router-link :to="{ name: 'projects' }">
-        <img id="nav-logo-img" src="@/assets/logos/lamemakes_nav_logo.png" />
+        <img id="nav-logo-img" src="@/assets/logos/lamemakes.webp" />
       </router-link>
     </div>
     <div id="nav-sidebar" :class="sideClosed ? 'open' : ''">

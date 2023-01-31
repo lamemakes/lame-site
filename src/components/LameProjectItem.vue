@@ -5,10 +5,7 @@
   >
     <div class="img-container">
       <div class="proj-thumbnail">
-        <img
-          v-if="project.images"
-          :src="project.images[project.coverImageIndex].url"
-        />
+        <LameImage v-if="project.images" :imageUrl="project.images[project.coverImageIndex].url" :thumbnail="true" />
       </div>
     </div>
     <div class="proj-info">
@@ -24,9 +21,12 @@ import type { Project } from "../types/projects.interface";
 import type { PropType } from "vue";
 import { defineComponent } from "vue";
 import dateUtils from "../utils/date";
+import LameImage from "./LameImage.vue";
 
 export default defineComponent({
-  name: "LameProjectMenuItem",
+  components: {
+    LameImage
+  },
   props: {
     project: {
       required: true,

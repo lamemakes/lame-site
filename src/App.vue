@@ -47,7 +47,7 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: var(--main-color);
-  background-image: url("@/assets/background/Desktop_Background.jpg");
+  background-image: url("@/assets/background/Desktop_Background.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -109,7 +109,7 @@ header {
 
 @media (min-width: 0px) and (max-width: 850px) {
   #app {
-    background-image: url("@/assets/background/Mobile_Background.jpg");
+    background-image: url("@/assets/background/Mobile_Background.webp");
   }
   .proj-pg {
     font-size: 1.15rem;
