@@ -141,6 +141,11 @@ a:visited {
   .proj-thumbnail {
     justify-items: center;
     width: 100%;
+    img {
+      min-height: 90%;
+      width: auto;
+    }
+    
   }
 
   .proj-info {

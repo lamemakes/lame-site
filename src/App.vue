@@ -3,7 +3,9 @@
     <LameDesktopNav v-if="!mobileView" />
     <LameMobileNav v-if="mobileView" />
   </header>
-  <router-view></router-view>
+  <div id="main-view">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script lang="ts">
@@ -51,8 +53,7 @@ export default defineComponent({
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  height: 100vh;
-  overflow: scroll;
+  overflow:hidden;
 }
 
 // Navigation bar
@@ -77,6 +78,13 @@ header {
   width: 100vw;
   background-color: #222;
   padding: 15px;
+}
+
+#main-view {    // Implemented for Safari to prevent overscrolling. Doesn't play nice with the site.
+  height: 100vh;
+  overflow: scroll;
+  overflow-y: auto; 
+  -webkit-overflow-scrolling: touch;
 }
 
 .title-desc {

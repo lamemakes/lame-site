@@ -21,21 +21,22 @@ export default defineComponent({
     },
     setup (props) {
         const inImageUrl = toRef(props, 'imageUrl');
-        const imageUrl = ref(inImageUrl.value)
+        const imageUrl = ref(inImageUrl.value);
+
 
         const mobileView = ref(viewUtils.isMobileView())
 
         window.addEventListener("resize", () => {mobileView.value = viewUtils.isMobileView()});
 
         // Get the url for an image - all images are WEBP
-        const getImageUrl = ():string | undefined => {
-            if (!(imageUrl.value.slice(imageUrl.value.length - 5, imageUrl.value.length) === ".webp")){
+        const getImageUrl = ():void => {
+            if (!(inImageUrl.value.slice(inImageUrl.value.length - 5, inImageUrl.value.length) === ".webp")){
                 // TODO: add a "catch all" image to handle this case (ie, a question mark)
-                console.error('Could not get image URL for "' + imageUrl.value + '"! Expected .webp...');
-                return undefined;
+                console.error('Could not get image URL for "' + inImageUrl.value + '"! Expected .webp...');
+                imageUrl.value = inImageUrl.value;
             }
 
-            let filename = props.imageUrl.slice(0, props.imageUrl.length - 5);
+            let filename = inImageUrl.value.slice(0, inImageUrl.value.length - 5);
 
             if (props.thumbnail) {
                 imageUrl.value = filename + "_thumb.webp";
@@ -48,7 +49,14 @@ export default defineComponent({
 
         getImageUrl();
 
+        // Watch for view to change
         watch(mobileView, () => {
+                getImageUrl();
+            }, { flush: "pre", immediate: true, deep: true }
+        );
+
+        // Watch for when image prop changes
+        watch(inImageUrl, () => {
                 getImageUrl();
             }, { flush: "pre", immediate: true, deep: true }
         );

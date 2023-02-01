@@ -1,11 +1,11 @@
 <template>
   <div v-if="openLiteBox" id="lite-box" class="lame-box">
-    <div @click="closeLiteBox()" id="close-lite-box">
+    <div @click="closeLiteBox()" id="close-lite-box" class="nav-btn">
       <img src="@/assets/buttons/close.png" />
     </div>
     <div class="gallery-nav">
       <div id="nav-container">
-        <div id="prev-pic" v-if="0 < imageIndex" @click="imgNav(-1)">
+        <div id="prev-pic" v-if="0 < imageIndex" @click="imgNav(-1)" class="nav-btn">
           <img src="@/assets/buttons/prev.png" />
         </div>
       </div>
@@ -14,12 +14,15 @@
           v-if="imageArray.length > imageIndex + 1"
           id="next-pic"
           @click="imgNav(1)"
+          class="nav-btn"
         >
-          <img src="@/assets/buttons/next.png" />
+          <img src="@/assets/buttons/next.png"/>
         </div>
       </div>
     </div>
-    <LameImage :imageUrl="imageArray[imageIndex].url" />
+    <div id="main-img">
+      <LameImage :imageUrl="imageArray[imageIndex].url" />
+    </div>
     <!-- TODO: Why two divs? -->
     <div v-if="imageArray[imageIndex].caption" id="pic-caption">
       <!-- <p class="caption-quote">"</p> -->
@@ -94,10 +97,12 @@ export default defineComponent({
   z-index: 5;
 }
 
-#lite-box > img {
-  max-width: 90%;
-  height: 30%;
-  width: auto;
+#main-img {
+  width: 90%;
+  height: auto;
+  img {
+    width: 90%;
+  }
 }
 
 #close-lite-box {
@@ -152,12 +157,6 @@ export default defineComponent({
   background-color: rgba(212, 212, 212, 0.8);
 }
 
-#next-pic:hover,
-#prev-pic:hover {
-  -webkit-filter: invert(100%);
-  filter: invert(100%);
-}
-
 #next-pic {
   justify-self: right;
 }
@@ -183,10 +182,16 @@ export default defineComponent({
   padding-bottom: 20px;
 }
 
-// .caption-quote {
-//   padding-left: 5px;
-//   padding-right: 5px;
-// }
+
+@media (min-width: 850px) {
+  #next-pic:hover,
+  #prev-pic:hover {
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+  }
+
+}
+
 
 @media (min-width: 0px) and (max-width: 850px) {
   #lite-box {

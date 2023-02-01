@@ -7,7 +7,7 @@
     </div>
     <div v-if="about" id="about-info" class="lame-box">
       <div class="img-container">
-        <img :src="about.me" id="me-pic" />
+        <LameImage :imageUrl="about.me" :thumbnail="true" />
       </div>
       <div id="about-me" v-html="about.desc"></div>
     </div>
@@ -20,10 +20,11 @@
 <script lang="ts">
 import { defineComponent, inject, ref } from "vue";
 import LameContactInfo from "../components/LameContactInfo.vue";
+import LameImage from "../components/LameImage.vue";
 import type { About } from "../types/about.interface";
 
 export default defineComponent({
-  components: { LameContactInfo },
+  components: { LameContactInfo, LameImage },
   setup() {
     const host = inject("host");
     const aboutEndpoint = host + "/about.json";
@@ -73,7 +74,7 @@ export default defineComponent({
 .img-container {
   display: flex;
   align-items: center;
-  #me-pic {
+  img {
     object-fit: cover;
     height: 100%;
     max-width: 100%;
