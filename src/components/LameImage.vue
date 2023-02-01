@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, ref, toRef, watch } from 'vue'
 import viewUtils from '../utils/view';
 
 // This component is used for reactive WEBP images. Pulls based off of windows size OR thumbnail prop
@@ -15,11 +15,12 @@ export default defineComponent({
         },
         thumbnail: {
             type: Boolean,
-            required: false
+            required: false,
+            default: false
         }
     },
     setup (props) {
-        const imageUrl = ref(props.imageUrl);
+        const imageUrl = toRef(props, 'imageUrl');
 
         const mobileView = ref(viewUtils.isMobileView())
 

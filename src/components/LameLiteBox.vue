@@ -91,7 +91,7 @@ export default defineComponent({
   border: solid 2px rgba(66, 185, 131, 1);
   max-height: 80%;
   padding-top: 20px;
-  z-index: 10;
+  z-index: 5;
 }
 
 #lite-box > img {

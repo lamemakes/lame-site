@@ -119,6 +119,7 @@ li:hover {
   transition: 1s transform cubic-bezier(0, 0.12, 0.14, 1);
   text-align: left;
   font-size: 2rem;
+  z-index: 10;
 }
 
 #sidebar-close {

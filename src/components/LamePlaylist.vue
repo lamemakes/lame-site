@@ -9,7 +9,6 @@
       width="90%"
       height="700px"
       frameBorder="0"
-      allowfullscreen=""
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
     ></iframe>
   </div>
