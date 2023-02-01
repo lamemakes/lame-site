@@ -20,7 +20,8 @@ export default defineComponent({
         }
     },
     setup (props) {
-        const imageUrl = toRef(props, 'imageUrl');
+        const inImageUrl = toRef(props, 'imageUrl');
+        const imageUrl = ref(inImageUrl.value)
 
         const mobileView = ref(viewUtils.isMobileView())
 
