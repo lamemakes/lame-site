@@ -2,12 +2,18 @@
   <nav>
     <div id="nav-logo">
       <router-link :to="{ name: 'projects' }">
-        <img id="nav-logo-img" src="@/assets/logos/lamemakes.webp" />
+        <img
+          id="nav-logo-img"
+          src="@/assets/logos/lamemakes.webp"
+        >
       </router-link>
     </div>
     <div id="nav-bar">
       <ul>
-        <li v-for="route in ROUTES" :key="route">
+        <li
+          v-for="route in ROUTES"
+          :key="route"
+        >
           <router-link
             :class="
               currentRoute == route
@@ -16,8 +22,8 @@
             "
             :to="{ name: route }"
           >
-            {{ route.charAt(0).toUpperCase() + route.slice(1) }}</router-link
-          >
+            {{ route.charAt(0).toUpperCase() + route.slice(1) }}
+          </router-link>
         </li>
       </ul>
     </div>

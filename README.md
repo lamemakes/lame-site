@@ -15,7 +15,8 @@ cd lame-site
 yarn install --frozen-lockfile                     # install dependencies
 ```
 
-**NOTE**: If running the vite dev server locally and using our own remote apache server containing statically hosted JSON files (ie. pulling from "yourdomain.com/projects.json"), it is required to enable CORS for JSON files. This can be done by adding the following lines in your ```.htaccess``` file (usually located in ```public_html/```).
+**NOTE**: If running the vite dev server locally and using our own remote apache server containing statically hosted JSON files (ie. pulling from "yourdomain.com/projects.json"), it is required to enable CORS for JSON files. This can be done by adding the following lines in your `.htaccess` file (usually located in `public_html/`).
+
 ```
 <FilesMatch "\.(json)$">
     <IfModule mod_headers.c>
@@ -23,7 +24,8 @@ yarn install --frozen-lockfile                     # install dependencies
     </IfModule>
 </FilesMatch>
 ```
-This lets Apache know to only allow CORS for JSON files. 
+
+This lets Apache know to only allow CORS for JSON files.
 
 ## Run the development server
 

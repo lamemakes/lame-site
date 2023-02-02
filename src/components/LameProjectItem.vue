@@ -5,7 +5,11 @@
   >
     <div class="img-container">
       <div class="proj-thumbnail">
-        <LameImage v-if="project.images" :imageUrl="project.images[project.coverImageIndex].url" :thumbnail="true" />
+        <LameImage
+          v-if="project.images"
+          :imageUrl="project.images[project.coverImageIndex].url"
+          :thumbnail="true"
+        />
       </div>
     </div>
     <div class="proj-info">
@@ -25,7 +29,7 @@ import LameImage from "./LameImage.vue";
 
 export default defineComponent({
   components: {
-    LameImage
+    LameImage,
   },
   props: {
     project: {
@@ -145,7 +149,6 @@ a:visited {
       min-height: 90%;
       width: auto;
     }
-    
   }
 
   .proj-info {

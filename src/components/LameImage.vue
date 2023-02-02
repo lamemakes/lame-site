@@ -1,71 +1,87 @@
 <template>
-    <img :src="imageUrl" />
+  <img :src="imageUrl" />
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, toRef, watch } from 'vue'
-import viewUtils from '../utils/view';
+import { defineComponent, ref, toRef, watch } from "vue";
+import viewUtils from "../utils/view";
 
 // This component is used for reactive WEBP images. Pulls based off of windows size OR thumbnail prop
 export default defineComponent({
-    props: {
-        imageUrl: {
-            type: String,
-            required: true
-        },
-        thumbnail: {
-            type: Boolean,
-            required: false,
-            default: false
-        }
+  props: {
+    imageUrl: {
+      type: String,
+      required: true,
     },
-    setup (props) {
-        const inImageUrl = toRef(props, 'imageUrl');
-        const imageUrl = ref(inImageUrl.value);
+    thumbnail: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+  setup(props) {
+    const inImageUrl = toRef(props, "imageUrl");
+    const imageUrl = ref(inImageUrl.value);
 
+    const mobileView = ref(viewUtils.isMobileView());
 
-        const mobileView = ref(viewUtils.isMobileView())
+    window.addEventListener("resize", () => {
+      mobileView.value = viewUtils.isMobileView();
+    });
 
-        window.addEventListener("resize", () => {mobileView.value = viewUtils.isMobileView()});
+    // Get the url for an image - all images are WEBP
+    const getImageUrl = (): void => {
+      if (
+        !(
+          inImageUrl.value.slice(
+            inImageUrl.value.length - 5,
+            inImageUrl.value.length
+          ) === ".webp"
+        )
+      ) {
+        // TODO: add a "catch all" image to handle this case (ie, a question mark)
+        console.error(
+          'Could not get image URL for "' +
+            inImageUrl.value +
+            '"! Expected .webp...'
+        );
+        imageUrl.value = inImageUrl.value;
+      }
 
-        // Get the url for an image - all images are WEBP
-        const getImageUrl = ():void => {
-            if (!(inImageUrl.value.slice(inImageUrl.value.length - 5, inImageUrl.value.length) === ".webp")){
-                // TODO: add a "catch all" image to handle this case (ie, a question mark)
-                console.error('Could not get image URL for "' + inImageUrl.value + '"! Expected .webp...');
-                imageUrl.value = inImageUrl.value;
-            }
+      let filename = inImageUrl.value.slice(0, inImageUrl.value.length - 5);
 
-            let filename = inImageUrl.value.slice(0, inImageUrl.value.length - 5);
+      if (props.thumbnail) {
+        imageUrl.value = filename + "_thumb.webp";
+      } else if (mobileView.value) {
+        imageUrl.value = filename + "_mobile.webp";
+      } else {
+        imageUrl.value = filename + ".webp";
+      }
+    };
 
-            if (props.thumbnail) {
-                imageUrl.value = filename + "_thumb.webp";
-            } else if (mobileView.value) {
-                imageUrl.value = filename + "_mobile.webp";
-            } else {
-                imageUrl.value = filename + ".webp";
-            }
-        }
+    getImageUrl();
 
+    // Watch for view to change
+    watch(
+      mobileView,
+      () => {
         getImageUrl();
+      },
+      { flush: "pre", immediate: true, deep: true }
+    );
 
-        // Watch for view to change
-        watch(mobileView, () => {
-                getImageUrl();
-            }, { flush: "pre", immediate: true, deep: true }
-        );
+    // Watch for when image prop changes
+    watch(
+      inImageUrl,
+      () => {
+        getImageUrl();
+      },
+      { flush: "pre", immediate: true, deep: true }
+    );
 
-        // Watch for when image prop changes
-        watch(inImageUrl, () => {
-                getImageUrl();
-            }, { flush: "pre", immediate: true, deep: true }
-        );
-
-        return {imageUrl}
-    }
-})
+    return { imageUrl };
+  },
+});
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

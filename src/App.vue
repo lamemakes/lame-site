@@ -4,7 +4,7 @@
     <LameMobileNav v-if="mobileView" />
   </header>
   <div id="main-view">
-    <router-view></router-view>
+    <router-view />
   </div>
 </template>
 
@@ -25,7 +25,9 @@ export default defineComponent({
 
     const mobileView = ref(viewUtils.isMobileView());
 
-    window.addEventListener("resize", () => {mobileView.value = viewUtils.isMobileView()});
+    window.addEventListener("resize", () => {
+      mobileView.value = viewUtils.isMobileView();
+    });
 
     return { mobileView };
   },
@@ -53,7 +55,7 @@ export default defineComponent({
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 // Navigation bar
@@ -80,10 +82,11 @@ header {
   padding: 15px;
 }
 
-#main-view {    // Implemented for Safari to prevent overscrolling. Doesn't play nice with the site.
+#main-view {
+  // Implemented for Safari to prevent overscrolling. Doesn't play nice with the site.
   height: 100vh;
   overflow: scroll;
-  overflow-y: auto; 
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 

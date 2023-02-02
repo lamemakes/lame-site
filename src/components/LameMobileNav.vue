@@ -1,20 +1,38 @@
 <template>
   <nav>
-    <div id="menu-icon" @click="sideClosed = !sideClosed">
-      <img id="menu-btn" src="@/assets/buttons/menu.png" />
+    <div
+      id="menu-icon"
+      @click="sideClosed = !sideClosed"
+    >
+      <img
+        id="menu-btn"
+        src="@/assets/buttons/menu.png"
+      >
     </div>
     <div id="nav-logo">
       <router-link :to="{ name: 'projects' }">
-        <img id="nav-logo-img" src="@/assets/logos/lamemakes.webp" />
+        <img
+          id="nav-logo-img"
+          src="@/assets/logos/lamemakes.webp"
+        >
       </router-link>
     </div>
-    <div id="nav-sidebar" :class="sideClosed ? 'open' : ''">
-      <div id="sidebar-close-spacer"></div>
+    <div
+      id="nav-sidebar"
+      :class="sideClosed ? 'open' : ''"
+    >
+      <div id="sidebar-close-spacer" />
       <div id="sidebar-close">
-        <img src="@/assets/buttons/close.png" @click="sideClosed = true" />
+        <img
+          src="@/assets/buttons/close.png"
+          @click="sideClosed = true"
+        >
       </div>
       <ul @click="sideClosed = true">
-        <li v-for="route in ROUTES" :key="route">
+        <li
+          v-for="route in ROUTES"
+          :key="route"
+        >
           <router-link
             :class="
               currentRoute == route
@@ -23,8 +41,8 @@
             "
             :to="{ name: route }"
           >
-            {{ route.charAt(0).toUpperCase() + route.slice(1) }}</router-link
-          >
+            {{ route.charAt(0).toUpperCase() + route.slice(1) }}
+          </router-link>
         </li>
       </ul>
       <LameContactInfo :is-small="true" />

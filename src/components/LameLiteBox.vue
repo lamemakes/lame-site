@@ -5,7 +5,12 @@
     </div>
     <div class="gallery-nav">
       <div id="nav-container">
-        <div id="prev-pic" v-if="0 < imageIndex" @click="imgNav(-1)" class="nav-btn">
+        <div
+          id="prev-pic"
+          v-if="0 < imageIndex"
+          @click="imgNav(-1)"
+          class="nav-btn"
+        >
           <img src="@/assets/buttons/prev.png" />
         </div>
       </div>
@@ -16,7 +21,7 @@
           @click="imgNav(1)"
           class="nav-btn"
         >
-          <img src="@/assets/buttons/next.png"/>
+          <img src="@/assets/buttons/next.png" />
         </div>
       </div>
     </div>
@@ -50,7 +55,7 @@ export default defineComponent({
     },
   },
   components: {
-    LameImage
+    LameImage,
   },
   setup(props) {
     const imageArray = ref(props.imageArray);
@@ -182,16 +187,13 @@ export default defineComponent({
   padding-bottom: 20px;
 }
 
-
 @media (min-width: 850px) {
   #next-pic:hover,
   #prev-pic:hover {
     -webkit-filter: invert(100%);
     filter: invert(100%);
   }
-
 }
-
 
 @media (min-width: 0px) and (max-width: 850px) {
   #lite-box {
