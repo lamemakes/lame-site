@@ -82,13 +82,9 @@ export default defineComponent({
   }
 }
 
-.contact-info {
-  padding-bottom: 90px; // Trial and error to get the buttons to fit on the page
-}
-
 @media (min-width: 0px) and (max-width: 850px) {
   .about-page {
-    padding-bottom: 20px;
+    padding-bottom: 90px;
   }
 
   #about-info {
