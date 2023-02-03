@@ -223,7 +223,7 @@ describe("The Project Menu Display", () => {
         title: "Instagram",
       },
     ];
-    let hackaday = { id: 5138008, private: false, updateFeed: false };
+    let hackaday = { id: "5138008", private: false, updateFeed: false };
 
     newProject.links = links;
     newProject.hackaday = hackaday;
@@ -260,7 +260,7 @@ describe("The Project Menu Display", () => {
         title: "Instagram",
       },
     ];
-    let hackaday = { id: 5138008, private: false, updateFeed: false };
+    let hackaday = { id: "5138008", private: false, updateFeed: false };
 
     newProject.links = links;
     newProject.hackaday = hackaday;
@@ -297,7 +297,7 @@ describe("The Project Menu Display", () => {
         title: "Instagram",
       },
     ];
-    let hackaday = { id: 5138008, private: false, updateFeed: false };
+    let hackaday = { id: "5138008", private: false, updateFeed: false };
 
     newProject.links = links;
     newProject.hackaday = hackaday;

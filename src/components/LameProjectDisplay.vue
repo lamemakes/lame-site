@@ -8,6 +8,9 @@
         <div id="project-title">
           <h1 class="heading" id="project-name">{{ project.name }}</h1>
           <p class="sub-heading" id="project-date">{{ formDate }}</p>
+          <div id="tags-container">
+            <LameProjectTags :tags="project.tags" />
+          </div>
         </div>
         <div id="header-spacer"></div>
       </div>
@@ -46,12 +49,14 @@ import type { Image } from "../types/image.interface";
 import type { PropType } from "vue";
 import { inject } from "vue";
 import LameGallery from "./LameGallery.vue";
+import LameProjectTags from "./LameProjectTags.vue";
 import { defineComponent, ref } from "vue";
 import dateUtils from "../utils/date";
 
 export default defineComponent({
   components: {
     LameGallery,
+    LameProjectTags
   },
   props: {
     project: {
@@ -92,7 +97,7 @@ export default defineComponent({
     // Auto-populate the hackaday link if the id is of type number & the link doesn't already exist in the link array.
     const hackadayProjectUrl = "https://hackaday.io/project/";
     if (
-      typeof project.value.hackaday.id === "number" &&
+      typeof project.value.hackaday.id === "string" &&
       project.value.links.filter(
         (link) =>
           link.type === "hackaday" &&
@@ -138,10 +143,10 @@ export default defineComponent({
 #project-heading {
   display: grid;
   grid-template-columns: 10% 80% 10%;
-  padding-bottom: 15px;
+  padding-bottom: 8px;
   padding-top: 10px;
   border-bottom: solid 5px #cbcbcb;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 #project-title {
@@ -152,6 +157,13 @@ export default defineComponent({
   p {
     font-size: 22px;
   }
+}
+
+#tags-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 #project-description {

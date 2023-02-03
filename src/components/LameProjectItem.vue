@@ -16,6 +16,9 @@
       <h2 class="proj-name">{{ project.name.toUpperCase() }}</h2>
       <p class="proj-date">{{ formDate }}</p>
       <p class="proj-summary">{{ formatSummary(project.summary) }}</p>
+      <div id="tags-container">
+        <LameProjectTags :tags="project.tags" />
+      </div>
     </div>
   </router-link>
 </template>
@@ -26,10 +29,12 @@ import type { PropType } from "vue";
 import { defineComponent } from "vue";
 import dateUtils from "../utils/date";
 import LameImage from "./LameImage.vue";
+import LameProjectTags from "./LameProjectTags.vue";
 
 export default defineComponent({
   components: {
     LameImage,
+    LameProjectTags
   },
   props: {
     project: {
@@ -130,6 +135,13 @@ a:visited {
   }
 }
 
+#tags-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
 @media (min-width: 0px) and (max-width: 850px) {
   a {
     display: flex;
@@ -138,6 +150,7 @@ a:visited {
     background-color: rgba(43, 43, 43, 0.8);
     margin-top: 20px;
     width: 100%;
+    min-width: 275px;
     justify-items: center;
     height: auto;
   }
@@ -155,6 +168,10 @@ a:visited {
     padding-top: 12px;
     text-align: center;
     width: 100%;
+  }
+
+  #tags-container {
+    justify-content: center;
   }
 }
 </style>

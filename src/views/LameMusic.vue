@@ -35,6 +35,7 @@ export default defineComponent({
   display: inline-grid;
   flex-direction: column;
   justify-content: center;
+  padding-bottom: 90px;
 }
 
 @media (min-width: 0px) and (max-width: 850px) {

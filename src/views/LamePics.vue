@@ -48,6 +48,7 @@ export default defineComponent({
   width: 100%;
   justify-items: center;
   display: grid;
+  padding-bottom: 90px;
   div {
     width: 80%;
   }

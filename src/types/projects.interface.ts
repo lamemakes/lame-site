@@ -8,7 +8,6 @@ export interface Project {
   summary: string;
   description: string;
   details: string;
-  labels?: string[];
   hackaday: Hackaday;
   images: Image[];
   coverImageIndex: number;
@@ -24,7 +23,7 @@ export interface Link {
 }
 
 export interface Hackaday {
-  id: null | number;
+  id: null | string;
   private: boolean;
   updateFeed: boolean;
 }

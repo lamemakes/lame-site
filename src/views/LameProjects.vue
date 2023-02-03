@@ -100,6 +100,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .list-container {
   width: 100%;
+  padding-bottom: 90px;
   display: inline-grid;
   justify-items: center;
 }

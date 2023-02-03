@@ -4,11 +4,8 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      // /search/screens -> /search?q=screens
       path: "/",
       redirect: () => {
-        // the function receives the target route as the argument
-        // we return a redirect path/location here.
         return { name: "projects" };
       },
     },
@@ -31,6 +28,17 @@ const router = createRouter({
       path: "/music",
       name: "music",
       component: () => import("../views/LameMusic.vue"),
+    },
+    {
+      path: "/404",
+      name: "notFound",
+      component: () => import("../views/Lame404.vue"),
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      redirect: () => {
+        return { name: "notFound" };
+      },
     },
   ],
 });

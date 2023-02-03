@@ -56,6 +56,8 @@ export default defineComponent({
   background-repeat: no-repeat;
   background-attachment: fixed;
   overflow: hidden;
+  height: 100vh;
+  padding-bottom: 90px; // Trial and error to get the buttons to fit on the page
 }
 
 // Navigation bar

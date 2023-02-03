@@ -68,7 +68,7 @@ export default defineComponent({
 #about-me {
   margin-top: 2%;
   padding-left: 15px;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .img-container {
@@ -80,6 +80,10 @@ export default defineComponent({
     max-width: 100%;
     border-radius: 5%;
   }
+}
+
+.contact-info {
+  padding-bottom: 90px; // Trial and error to get the buttons to fit on the page
 }
 
 @media (min-width: 0px) and (max-width: 850px) {

@@ -131,13 +131,14 @@ li:hover {
   top: 0px;
   left: 0px;
   width: 50%;
-  height: 100%;
+  height: 100vh;
   background-color: var(--main-color);
   color: #222;
   transition: 1s transform cubic-bezier(0, 0.12, 0.14, 1);
   text-align: left;
   font-size: 2rem;
   z-index: 10;
+  overflow: hidden;
 }
 
 #sidebar-close {
