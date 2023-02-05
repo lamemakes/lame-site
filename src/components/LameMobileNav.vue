@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav id="mobile-nav">
     <div
       id="menu-icon"
       @click="sideClosed = !sideClosed"
@@ -65,6 +65,19 @@ export default defineComponent({
     // Determines current route to know what to highlight in the menu
     const route = useRoute();
     const currentRoute = ref(route.name?.toString());
+    
+    // Adding a listener to detect if the user clicks outside the mobile nav
+    // document.body.addEventListener("click", (evt) => {
+    //   let mobileMenu = document.getElementById('mobile-nav');
+    //   let navButton = document.getElementById('menu-btn');
+    //   let targetClick = evt.target; // This is where the click happens
+    //   console.log(targetClick);
+    //   if (targetClick != mobileMenu || targetClick != navButton) {
+    //     sideClosed.value = !sideClosed.value
+    //   }
+    //   return;
+    // })
+
     watch(
       route,
       (to) => {

@@ -5,8 +5,8 @@ import LameProjectDisplay from "../LameProjectDisplay.vue";
 import LameGallery from "../LameGallery.vue";
 import { TEST_PROJECT } from "./test_project";
 
-const factory = (props: any) => {
-  return mount(LameProjectDisplay, { props });
+const factory = (props: any, global: any = {}) => {
+  return mount(LameProjectDisplay, { props, global });
 };
 
 describe("The Project Menu Display", () => {
@@ -51,10 +51,10 @@ describe("The Project Menu Display", () => {
     expect(wrapper.getComponent(LameGallery).props()).toEqual({
       imageArray: [
         {
-          url: "https://lamemakes.com/imgs/STERIODS_TITLECARD.jpg",
+          url: "https://lamemakes.com/imgs/STERIODS_TITLECARD.webp",
           caption: "",
         },
-        { url: "https://lamemakes.com/imgs/wow.png", caption: "" },
+        { url: "https://lamemakes.com/imgs/wow.webp", caption: "" },
       ],
     });
     wrapper.unmount();
@@ -65,7 +65,7 @@ describe("The Project Menu Display", () => {
     newProject.coverInDisplay = false;
     const wrapper = factory({ project: newProject });
     expect(wrapper.getComponent(LameGallery).props()).toEqual({
-      imageArray: [{ url: "https://lamemakes.com/imgs/wow.png", caption: "" }],
+      imageArray: [{ url: "https://lamemakes.com/imgs/wow.webp", caption: "" }],
     });
     wrapper.unmount();
   });
@@ -122,7 +122,7 @@ describe("The Project Menu Display", () => {
       },
     ];
     newProject.links = links;
-    const wrapper = factory({ project: newProject }); // Links array is empty by default
+    const wrapper = factory({ project: newProject }, { provide: {host: 'https://lamemakes.com'} }); // Links array is empty by default
     let renderedIcons = wrapper
       .findAll("img")
       .filter((domItem) => domItem.element.className === "link-icon");

@@ -15,11 +15,11 @@ export const TEST_PROJECT: Project = {
   },
   images: [
     {
-      url: "https://lamemakes.com/imgs/STERIODS_TITLECARD.jpg",
+      url: "https://lamemakes.com/imgs/STERIODS_TITLECARD.webp",
       caption: "",
     },
     {
-      url: "https://lamemakes.com/imgs/wow.png",
+      url: "https://lamemakes.com/imgs/wow.webp",
       caption: "",
     },
   ],

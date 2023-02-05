@@ -1,6 +1,6 @@
 <template>
-    <div v-for="tag in tags" :key="tag" class="tag" :class="SUPPORTED_TAGS.includes(tag.replace(' ', '-')) ? tag.replace(' ', '-') : 'other'">
-        <p>{{ tag }}</p>
+    <div v-for="tag in tags" :key="tag" class="tag" :class="SUPPORTED_TAGS.includes(tag) ? tag.replace(' ', '-') : 'other'">
+        <p>{{ tag }}</p> <!-- Adding the applicable emoji to the tag -->
     </div>
 </template>
 
@@ -17,7 +17,7 @@ export default defineComponent({
     },
     setup (props) {
         const tags = ref(props.tags)
-        const SUPPORTED_TAGS = ["ongoing-project", "completed-project", "scrapped-project", "hardware", "software", "art"]
+        const SUPPORTED_TAGS = ["researching project", "ongoing project", "completed project", "scrapped project", "hardware", "software", "art"]
 
         // Sometimes tag arrays come in that are empty strings (or if they're too long for some reason), filter them out.
         const TAG_MAX_LEN = 20;
@@ -67,14 +67,14 @@ export default defineComponent({
 }
 
 .ongoing-project {
-    background-color: #ffd966;
+    background-color: #ffb566;
 }
 
 .scrapped-project {
     background-color: #ff4d4d;
 }
 .hardware {
-    background-color: #ff9666;
+    background-color: #667aff;
 }
 
 .software {

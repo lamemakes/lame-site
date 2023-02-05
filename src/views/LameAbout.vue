@@ -68,7 +68,7 @@ export default defineComponent({
 #about-me {
   margin-top: 2%;
   padding-left: 15px;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .img-container {
@@ -96,6 +96,7 @@ export default defineComponent({
   #about-me {
     padding: 0;
     margin-top: 10px;
+    font-size: 15px;
   }
 
   #me-pic {

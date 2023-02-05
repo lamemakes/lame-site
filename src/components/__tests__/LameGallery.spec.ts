@@ -12,22 +12,22 @@ const factory = (props: any, global: any = {}) => {
 describe("The Project Menu Item", () => {
   const oneImageArray = [
     {
-      url: "http://lamemakes.com/testpic.jpg",
-      caption: "Test caption for testpic.jpg",
+      url: "http://lamemakes.com/testpic.webp",
+      caption: "Test caption for testpic.webp",
     },
   ];
 
   const multiImageArray = [
     {
-      url: "http://lamemakes.com/testpic.jpg",
-      caption: "Test caption for testpic.jpg",
+      url: "http://lamemakes.com/testpic.webp",
+      caption: "Test caption for testpic.webp",
     },
     {
-      url: "http://lamemakes.com/yeeters.jpg",
+      url: "http://lamemakes.com/yeeters.webp",
       caption: "",
     },
     {
-      url: "http://lamemakes.com/mic-check-123.jpg",
+      url: "http://lamemakes.com/mic-check-123.webp",
       caption: "This is another test",
     },
   ];
@@ -38,10 +38,10 @@ describe("The Project Menu Item", () => {
     wrapper.unmount();
   });
 
-  it("properly sources the single image in the gallery", () => {
+  it("properly sources the single image thumbnail in the gallery", () => {
     const wrapper = factory({ imageArray: oneImageArray });
     expect(wrapper.find("img").element.src).toEqual(
-      "http://lamemakes.com/testpic.jpg"
+      "http://lamemakes.com/testpic_thumb.webp"
     );
     wrapper.unmount();
   });
@@ -52,13 +52,13 @@ describe("The Project Menu Item", () => {
     wrapper.unmount();
   });
 
-  it("properly sources all images in the gallery", () => {
+  it("properly sources all image thumbnails in the gallery", () => {
     const wrapper = factory({ imageArray: multiImageArray });
     let images = wrapper.findAll("img");
-    expect(images[0].element.src).toEqual("http://lamemakes.com/testpic.jpg");
-    expect(images[1].element.src).toEqual("http://lamemakes.com/yeeters.jpg");
+    expect(images[0].element.src).toEqual("http://lamemakes.com/testpic_thumb.webp");
+    expect(images[1].element.src).toEqual("http://lamemakes.com/yeeters_thumb.webp");
     expect(images[2].element.src).toEqual(
-      "http://lamemakes.com/mic-check-123.jpg"
+      "http://lamemakes.com/mic-check-123_thumb.webp"
     );
     wrapper.unmount();
   });

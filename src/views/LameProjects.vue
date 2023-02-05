@@ -20,7 +20,7 @@
 import { defineComponent, ref, inject, watch } from "vue";
 import LameProjectMenuItem from "../components/LameProjectItem.vue";
 import LameProjectDisplay from "../components/LameProjectDisplay.vue";
-import dateUtils from "../utils/date";
+import backendUtils from "../utils/backend";
 
 import type { Project } from "../types/projects.interface";
 import { useRoute } from "vue-router";
@@ -38,19 +38,9 @@ export default defineComponent({
     const projects = ref([] as Project[]);
 
     // Pull projects from projects.json static file (auto generated)
-    const loadProjects = async (): Promise<void> => {
-      try {
-        const data = await fetch(projectsEndpoint);
-        if (!data.ok) {
-          throw Error("Failed to get project data!");
-        }
-        let temp_projects = await data.json();
-        projects.value = dateUtils.sortProjectDates(temp_projects.projects);
-      } catch (error) {
-        console.error(error);
-        projects.value = [];
-      }
-    };
+    const loadProjects = async () => {
+      projects.value = await backendUtils.loadProjects(); 
+    }
 
     const getProjectById = (id: string): Project | undefined => {
       var project: Project | undefined = undefined;

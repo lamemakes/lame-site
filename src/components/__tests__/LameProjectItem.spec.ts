@@ -38,7 +38,7 @@ describe("The Project Menu Item", () => {
   it("properly sources thumbnail", () => {
     const wrapper = factory({ project: TEST_PROJECT });
     expect(wrapper.find("img").element.src).toEqual(
-      "https://lamemakes.com/imgs/STERIODS_TITLECARD.jpg"
+      "https://lamemakes.com/imgs/STERIODS_TITLECARD_thumb.webp"
     ); // The first image url in the images array, as specified by the coverImageIndex.
     wrapper.unmount();
   });

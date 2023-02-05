@@ -104,8 +104,9 @@ export default defineComponent({
 
 #main-img {
   width: 90%;
-  height: auto;
+  max-height: 30%;
   img {
+    object-fit: cover;
     width: 90%;
   }
 }

@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 
 import { mount } from "@vue/test-utils";
 import LameLiteBox from "../LameLiteBox.vue";
+import LameImage from "../LameImage.vue";
 import { nextTick } from "vue";
 
 const factory = (props: any, global: any = {}) => {
@@ -11,22 +12,22 @@ const factory = (props: any, global: any = {}) => {
 describe("The Image LiteBox", () => {
   const oneImageArray = [
     {
-      url: "http://lamemakes.com/testpic.jpg",
-      caption: "Test caption for testpic.jpg",
+      url: "http://lamemakes.com/testpic.webp",
+      caption: "Test caption for testpic.webp",
     },
   ];
 
   const multiImageArray = [
     {
-      url: "http://lamemakes.com/testpic.jpg",
-      caption: "Test caption for testpic.jpg",
+      url: "http://lamemakes.com/testpic.webp",
+      caption: "Test caption for testpic.webp",
     },
     {
-      url: "http://lamemakes.com/yeeters.jpg",
+      url: "http://lamemakes.com/yeeters.webp",
       caption: "",
     },
     {
-      url: "http://lamemakes.com/mic-check-123.jpg",
+      url: "http://lamemakes.com/mic-check-123.webp",
       caption: "This is another test",
     },
   ];
@@ -43,7 +44,7 @@ describe("The Image LiteBox", () => {
     let mainImg = wrapper
       .findAll("img")
       .filter((domItem) => domItem.element.id === "main-img")[0]; // Done this way as main image index is somewhat undpredictable when the nav icons exist sometimes based on index.
-    expect(mainImg.element.src).toEqual("http://lamemakes.com/testpic.jpg");
+    expect(wrapper.getComponent(LameImage).props()).toEqual({imageUrl: "http://lamemakes.com/testpic.webp", thumbnail: false});
     wrapper.unmount();
   });
 
@@ -56,29 +57,19 @@ describe("The Image LiteBox", () => {
 
   it("properly sources the selected image in the LiteBox", () => {
     const wrapper = factory({ imageArray: multiImageArray, selectedIndex: 1 });
-    let mainImg = wrapper
-      .findAll("img")
-      .filter((domItem) => domItem.element.id === "main-img")[0];
-    expect(mainImg.element.src).toEqual("http://lamemakes.com/yeeters.jpg");
+
+    expect(wrapper.getComponent(LameImage).props()).toEqual({imageUrl: "http://lamemakes.com/yeeters.webp", thumbnail: false});
     wrapper.unmount();
   });
 
   it('utilizes the "next" nav button to see the next image in the array', async () => {
     const wrapper = factory({ imageArray: multiImageArray, selectedIndex: 1 });
 
-    let mainImg = wrapper
-      .findAll("img")
-      .filter((domItem) => domItem.element.id === "main-img")[0];
-    expect(mainImg.element.src).toEqual("http://lamemakes.com/yeeters.jpg");
-
+    expect(wrapper.getComponent(LameImage).props()).toEqual({imageUrl: "http://lamemakes.com/yeeters.webp", thumbnail: false});
+    
     await wrapper.find("#next-pic").trigger("click");
 
-    mainImg = wrapper
-      .findAll("img")
-      .filter((domItem) => domItem.element.id === "main-img")[0];
-    expect(mainImg.element.src).toEqual(
-      "http://lamemakes.com/mic-check-123.jpg"
-    );
+    expect(wrapper.getComponent(LameImage).props()).toEqual({imageUrl: "http://lamemakes.com/mic-check-123.webp", thumbnail: false});
     wrapper.unmount();
   });
 
@@ -88,14 +79,14 @@ describe("The Image LiteBox", () => {
     let mainImg = wrapper
       .findAll("img")
       .filter((domItem) => domItem.element.id === "main-img")[0];
-    expect(mainImg.element.src).toEqual("http://lamemakes.com/yeeters.jpg");
+    expect(wrapper.getComponent(LameImage).props()).toEqual({imageUrl: "http://lamemakes.com/yeeters.webp", thumbnail: false});
 
     await wrapper.find("#prev-pic").trigger("click");
 
     mainImg = wrapper
       .findAll("img")
       .filter((domItem) => domItem.element.id === "main-img")[0];
-    expect(mainImg.element.src).toEqual("http://lamemakes.com/testpic.jpg");
+    expect(wrapper.getComponent(LameImage).props()).toEqual({imageUrl: "http://lamemakes.com/testpic.webp", thumbnail: false});
     wrapper.unmount();
   });
 

@@ -25,6 +25,7 @@
 import { defineComponent, inject, ref } from "vue";
 import dateUtils from "../utils/date";
 import type { AlbumOfTheMonth } from "../types/album.interface";
+import backendUtils from "../utils/backend";
 
 export default defineComponent({
   setup() {
@@ -36,19 +37,11 @@ export default defineComponent({
 
     const albumOfTheMonth = ref<AlbumOfTheMonth>();
 
-    const loadAlbum = async (): Promise<void> => {
-      try {
-        const data = await fetch(albumEndpoint);
-        if (!data.ok) {
-          throw Error("Failed to get album of the month data!");
-        }
-        let tempAlbumOfTheMonth = await data.json();
-        albumOfTheMonth.value = tempAlbumOfTheMonth.music.albumOfTheMonth;
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
+    // Pull the album of the month from the static json file
+    const loadAlbum = async () => {
+      albumOfTheMonth.value = await backendUtils.loadAlbum()
+    }
+    
     loadAlbum();
 
     return { currentMonth, albumOfTheMonth };

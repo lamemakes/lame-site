@@ -121,6 +121,7 @@ export default defineComponent({
   width: 100%;
   display: flex;
   justify-content: center;
+  padding-bottom: 90px; // Again, temporary until I figure out why bottom part is being cut off
 }
 
 .project-display {

@@ -12,32 +12,21 @@
 import { defineComponent, inject, ref } from "vue";
 import type { Image } from "../types/image.interface";
 import LameGallery from "../components/LameGallery.vue";
+import backendUtils from "../utils/backend";
 
 export default defineComponent({
   components: {
     LameGallery,
   },
   setup() {
-    const host = inject("host");
-    const picsEndpoint = host + "/imgs.json";
-
     const pics = ref([] as Image[]);
 
     // Pull pics from pics.json static file (auto generated)
-    const loadpics = async (): Promise<void> => {
-      try {
-        const data = await fetch(picsEndpoint);
-        if (!data.ok) {
-          throw Error("Failed to get project data!");
-        }
-        pics.value = await data.json();
-      } catch (error) {
-        console.error(error);
-        pics.value = [];
-      }
+    const loadPics = async (): Promise<void> => {
+      pics.value = await backendUtils.loadPics();
     };
 
-    loadpics();
+    loadPics();
 
     return { pics };
   },
