@@ -57,7 +57,7 @@ const loadPics = async (): Promise<Image[]> => {
     }
 }
 
-const loadAbout = async (): Promise<About> => {
+const loadAbout = async (): Promise<About | undefined> => {
     try {
       const host = inject('host');
       const aboutEndpoint = host + "/about.json"
@@ -69,6 +69,7 @@ const loadAbout = async (): Promise<About> => {
       return await data.json();
     } catch (error) {
       console.error(error);
+      return undefined;
     }
   };
 
