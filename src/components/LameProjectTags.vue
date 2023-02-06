@@ -70,6 +70,10 @@ export default defineComponent({
     background-color: #ffb566;
 }
 
+.researching-project {
+    background-color: #7066ff;
+}
+
 .scrapped-project {
     background-color: #ff4d4d;
 }
