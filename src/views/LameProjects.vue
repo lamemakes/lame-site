@@ -1,5 +1,9 @@
 <template>
-  <LameProjectDisplay id="project-display" v-if="selectedProject" :project="selectedProject" />
+  <LameProjectDisplay
+    id="project-display"
+    v-if="selectedProject"
+    :project="selectedProject"
+  />
   <div v-else>
     <div class="title-desc">
       <h1 class="heading">Projects</h1>
@@ -39,8 +43,8 @@ export default defineComponent({
 
     // Pull projects from projects.json static file (auto generated)
     const loadProjects = async () => {
-      projects.value = await backendUtils.loadProjects(); 
-    }
+      projects.value = await backendUtils.loadProjects();
+    };
 
     const getProjectById = (id: string): Project | undefined => {
       var project: Project | undefined = undefined;

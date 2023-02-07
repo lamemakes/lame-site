@@ -34,7 +34,7 @@ import LameProjectTags from "./LameProjectTags.vue";
 export default defineComponent({
   components: {
     LameImage,
-    LameProjectTags
+    LameProjectTags,
   },
   props: {
     project: {
@@ -136,10 +136,10 @@ a:visited {
 }
 
 #tags-container {
-    display: flex;
-    flex-direction: row;
-    margin-top: 5px;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+  flex-wrap: wrap;
 }
 
 @media (min-width: 0px) and (max-width: 850px) {

@@ -122,7 +122,10 @@ describe("The Project Menu Display", () => {
       },
     ];
     newProject.links = links;
-    const wrapper = factory({ project: newProject }, { provide: {host: 'https://lamemakes.com'} }); // Links array is empty by default
+    const wrapper = factory(
+      { project: newProject },
+      { provide: { host: "https://lamemakes.com" } }
+    ); // Links array is empty by default
     let renderedIcons = wrapper
       .findAll("img")
       .filter((domItem) => domItem.element.className === "link-icon");

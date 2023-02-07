@@ -44,7 +44,10 @@ describe("The Image LiteBox", () => {
     let mainImg = wrapper
       .findAll("img")
       .filter((domItem) => domItem.element.id === "main-img")[0]; // Done this way as main image index is somewhat undpredictable when the nav icons exist sometimes based on index.
-    expect(wrapper.getComponent(LameImage).props()).toEqual({imageUrl: "http://lamemakes.com/testpic.webp", thumbnail: false});
+    expect(wrapper.getComponent(LameImage).props()).toEqual({
+      imageUrl: "http://lamemakes.com/testpic.webp",
+      thumbnail: false,
+    });
     wrapper.unmount();
   });
 
@@ -58,18 +61,27 @@ describe("The Image LiteBox", () => {
   it("properly sources the selected image in the LiteBox", () => {
     const wrapper = factory({ imageArray: multiImageArray, selectedIndex: 1 });
 
-    expect(wrapper.getComponent(LameImage).props()).toEqual({imageUrl: "http://lamemakes.com/yeeters.webp", thumbnail: false});
+    expect(wrapper.getComponent(LameImage).props()).toEqual({
+      imageUrl: "http://lamemakes.com/yeeters.webp",
+      thumbnail: false,
+    });
     wrapper.unmount();
   });
 
   it('utilizes the "next" nav button to see the next image in the array', async () => {
     const wrapper = factory({ imageArray: multiImageArray, selectedIndex: 1 });
 
-    expect(wrapper.getComponent(LameImage).props()).toEqual({imageUrl: "http://lamemakes.com/yeeters.webp", thumbnail: false});
-    
+    expect(wrapper.getComponent(LameImage).props()).toEqual({
+      imageUrl: "http://lamemakes.com/yeeters.webp",
+      thumbnail: false,
+    });
+
     await wrapper.find("#next-pic").trigger("click");
 
-    expect(wrapper.getComponent(LameImage).props()).toEqual({imageUrl: "http://lamemakes.com/mic-check-123.webp", thumbnail: false});
+    expect(wrapper.getComponent(LameImage).props()).toEqual({
+      imageUrl: "http://lamemakes.com/mic-check-123.webp",
+      thumbnail: false,
+    });
     wrapper.unmount();
   });
 
@@ -79,14 +91,20 @@ describe("The Image LiteBox", () => {
     let mainImg = wrapper
       .findAll("img")
       .filter((domItem) => domItem.element.id === "main-img")[0];
-    expect(wrapper.getComponent(LameImage).props()).toEqual({imageUrl: "http://lamemakes.com/yeeters.webp", thumbnail: false});
+    expect(wrapper.getComponent(LameImage).props()).toEqual({
+      imageUrl: "http://lamemakes.com/yeeters.webp",
+      thumbnail: false,
+    });
 
     await wrapper.find("#prev-pic").trigger("click");
 
     mainImg = wrapper
       .findAll("img")
       .filter((domItem) => domItem.element.id === "main-img")[0];
-    expect(wrapper.getComponent(LameImage).props()).toEqual({imageUrl: "http://lamemakes.com/testpic.webp", thumbnail: false});
+    expect(wrapper.getComponent(LameImage).props()).toEqual({
+      imageUrl: "http://lamemakes.com/testpic.webp",
+      thumbnail: false,
+    });
     wrapper.unmount();
   });
 

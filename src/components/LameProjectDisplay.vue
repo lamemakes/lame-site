@@ -56,7 +56,7 @@ import dateUtils from "../utils/date";
 export default defineComponent({
   components: {
     LameGallery,
-    LameProjectTags
+    LameProjectTags,
   },
   props: {
     project: {
@@ -161,10 +161,10 @@ export default defineComponent({
 }
 
 #tags-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 #project-description {

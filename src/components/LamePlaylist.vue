@@ -1,9 +1,6 @@
 <template>
   <div class="lame-box playlist-container">
-    <p
-      id="playlist-title"
-      class="sub-heading"
-    >
+    <p id="playlist-title" class="sub-heading">
       My favorite frequently cycled out playlist:
     </p>
     <iframe

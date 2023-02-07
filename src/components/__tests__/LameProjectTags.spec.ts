@@ -6,12 +6,11 @@ import test_project from "./test_project";
 import LameProjectTags from "../LameProjectTags.vue";
 
 const factory = (props: any) => {
-  return mount(LameProjectTags, {props});
+  return mount(LameProjectTags, { props });
 };
 
 const SINGLE_TAG = ["test"];
 const MANY_TAGS = ["hardware", "software", "test", "ongoing project"];
-
 
 describe("The Project Tags", () => {
   it("renders no tags if an empty array is given", () => {
@@ -44,12 +43,17 @@ describe("The Project Tags", () => {
 
   it("adds each tag to the appropriate class", () => {
     const wrapper = factory({ tags: MANY_TAGS });
-    expect(wrapper.findAll(".tag")[0].element.className).toEqual("tag ongoing-project");
-    expect(wrapper.findAll(".tag")[1].element.className).toEqual("tag hardware");
-    expect(wrapper.findAll(".tag")[2].element.className).toEqual("tag software");
+    expect(wrapper.findAll(".tag")[0].element.className).toEqual(
+      "tag ongoing-project"
+    );
+    expect(wrapper.findAll(".tag")[1].element.className).toEqual(
+      "tag hardware"
+    );
+    expect(wrapper.findAll(".tag")[2].element.className).toEqual(
+      "tag software"
+    );
     expect(wrapper.findAll(".tag")[3].element.className).toEqual("tag other");
 
     wrapper.unmount();
   });
-
 });

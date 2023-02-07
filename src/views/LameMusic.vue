@@ -1,11 +1,7 @@
 <template>
   <div class="title-desc">
-    <h1 class="heading">
-      Fat Beats
-    </h1>
-    <p class="sub-heading">
-      Unsolicited Music Opinions
-    </p>
+    <h1 class="heading">Fat Beats</h1>
+    <p class="sub-heading">Unsolicited Music Opinions</p>
   </div>
   <div id="music-container">
     <LameMonthlyAlbum />

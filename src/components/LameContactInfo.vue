@@ -8,7 +8,7 @@
       class="contact-btn"
       :class="$props.isSmall ? 'small-btn' : 'large-btn'"
     >
-      <img :src="logoEndpoint + contact.name + '.png'">
+      <img :src="logoEndpoint + contact.name + '.png'" />
     </a>
   </div>
 </template>

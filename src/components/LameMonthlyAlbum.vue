@@ -14,7 +14,7 @@
       by <span id="album-artist">{{ albumOfTheMonth?.artist }}</span>
     </p>
     <!-- Expects a spotify embedded iframe containing album of the month -->
-    <div 
+    <div
       id="spotify-container"
       v-if="albumOfTheMonth && albumOfTheMonth.spotifyEmbedHtml"
       v-html="albumOfTheMonth.spotifyEmbedHtml"
@@ -36,9 +36,9 @@ export default defineComponent({
 
     // Pull the album of the month from the static json file
     const loadAlbum = async () => {
-      albumOfTheMonth.value = await backendUtils.loadAlbum()
-    }
-    
+      albumOfTheMonth.value = await backendUtils.loadAlbum();
+    };
+
     loadAlbum();
 
     return { currentMonth, albumOfTheMonth };
