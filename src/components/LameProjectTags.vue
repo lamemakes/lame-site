@@ -21,7 +21,9 @@ export default defineComponent({
 
         // Sometimes tag arrays come in that are empty strings (or if they're too long for some reason), filter them out.
         const TAG_MAX_LEN = 20;
-        tags.value = tags.value.filter(tag => tag != "" && tag.length <= TAG_MAX_LEN);
+        if (tags.value.length > 0) {   
+            tags.value = tags.value.filter(tag => tag != "" && tag.length <= TAG_MAX_LEN);
+        }
 
         // Put the project status tags in the front
         const sortTags = (tag1:string, tag2:string) => {

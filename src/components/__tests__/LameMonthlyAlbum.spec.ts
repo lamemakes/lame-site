@@ -22,8 +22,6 @@ vi.spyOn(backendUtils, 'loadAlbum').mockResolvedValue(TEST_MUSIC);
 describe("The Album of the Month", () => {
 
     it("renders the album of the month container", async () => {
-      // const mockBackend = await import('../../utils/backend');
-      // mockBackend.default.loadAlbum = vi.fn().mockResolvedValue(TEST_MUSIC);
 
       const wrapper = await mount(LameMonthlyAlbum);
 
@@ -70,7 +68,7 @@ describe("The Album of the Month", () => {
       expect(dateUtils.getLongMonth).toBeCalled();
       expect(backendUtils.loadAlbum).toBeCalled();
 
-      // Crazy chain needed for the fetch call to be made, then for the v-if to update
+
       await wrapper.vm.$forceUpdate();
       await wrapper.vm.$nextTick();
       await wrapper.vm.$forceUpdate();
@@ -109,7 +107,7 @@ describe("The Album of the Month", () => {
       expect(dateUtils.getLongMonth).toBeCalled();
       expect(backendUtils.loadAlbum).toBeCalled();
 
-      // Crazy chain needed for the fetch call to be made, then for the v-if to update
+
       await wrapper.vm.$forceUpdate();
       await wrapper.vm.$nextTick();
       await wrapper.vm.$forceUpdate();
@@ -126,7 +124,7 @@ describe("The Album of the Month", () => {
 
       expect(backendUtils.loadAlbum).toBeCalled();
 
-      // Crazy chain needed for the fetch call to be made, then for the v-if to update
+
       await wrapper.vm.$forceUpdate();
       await wrapper.vm.$nextTick();
       await wrapper.vm.$forceUpdate();
@@ -143,7 +141,7 @@ describe("The Album of the Month", () => {
 
       expect(backendUtils.loadAlbum).toBeCalled();
 
-      // Crazy chain needed for the fetch call to be made, then for the v-if to update
+
       await wrapper.vm.$forceUpdate();
       await wrapper.vm.$nextTick();
       await wrapper.vm.$forceUpdate();

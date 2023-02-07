@@ -1,5 +1,5 @@
 <template>
-  <LameProjectDisplay v-if="selectedProject" :project="selectedProject" />
+  <LameProjectDisplay id="project-display" v-if="selectedProject" :project="selectedProject" />
   <div v-else>
     <div class="title-desc">
       <h1 class="heading">Projects</h1>
@@ -10,7 +10,7 @@
         :key="project.id"
         class="project-container"
       >
-        <LameProjectMenuItem :project="project" />
+        <LameProjectMenuItem id="project-item" :project="project" />
       </div>
     </div>
   </div>

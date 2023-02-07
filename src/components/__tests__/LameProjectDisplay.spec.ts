@@ -3,7 +3,7 @@ import { describe, it, expect, afterAll } from "vitest";
 import { mount } from "@vue/test-utils";
 import LameProjectDisplay from "../LameProjectDisplay.vue";
 import LameGallery from "../LameGallery.vue";
-import { TEST_PROJECT } from "./test_project";
+import test_project from "./test_project";
 
 const factory = (props: any, global: any = {}) => {
   return mount(LameProjectDisplay, { props, global });
@@ -11,19 +11,19 @@ const factory = (props: any, global: any = {}) => {
 
 describe("The Project Menu Display", () => {
   it("renders the project title", () => {
-    const wrapper = factory({ project: TEST_PROJECT });
+    const wrapper = factory({ project: test_project.TEST_PROJECT });
     expect(wrapper.find("#project-name").text()).toEqual("The Test Project");
     wrapper.unmount();
   });
 
   it("renders the project date", () => {
-    const wrapper = factory({ project: TEST_PROJECT });
+    const wrapper = factory({ project: test_project.TEST_PROJECT });
     expect(wrapper.find("#project-date").text()).toEqual("October 13, 2022");
     wrapper.unmount();
   });
 
   it("renders the project description", () => {
-    const wrapper = factory({ project: TEST_PROJECT });
+    const wrapper = factory({ project: test_project.TEST_PROJECT });
     expect(wrapper.find("#project-description").text()).toEqual(
       "This is a test description section"
     );
@@ -31,7 +31,7 @@ describe("The Project Menu Display", () => {
   });
 
   it("renders the project details", () => {
-    const wrapper = factory({ project: TEST_PROJECT });
+    const wrapper = factory({ project: test_project.TEST_PROJECT });
     expect(wrapper.find("#project-details").element.innerHTML).toEqual(
       "<p>This is a test details section</p>"
     );
@@ -39,7 +39,7 @@ describe("The Project Menu Display", () => {
   });
 
   it("renders the project details", () => {
-    const wrapper = factory({ project: TEST_PROJECT });
+    const wrapper = factory({ project: test_project.TEST_PROJECT });
     expect(wrapper.find("#project-details").element.innerHTML).toEqual(
       "<p>This is a test details section</p>"
     );
@@ -47,7 +47,7 @@ describe("The Project Menu Display", () => {
   });
 
   it("does not remove the thumbnail picture from the picture array if coverInDisplay is true", () => {
-    const wrapper = factory({ project: TEST_PROJECT }); // coverInDisplay is set to true by default
+    const wrapper = factory({ project: test_project.TEST_PROJECT }); // coverInDisplay is set to true by default
     expect(wrapper.getComponent(LameGallery).props()).toEqual({
       imageArray: [
         {
@@ -61,7 +61,7 @@ describe("The Project Menu Display", () => {
   });
 
   it("removes the thumbnail picture from the picture array if coverInDisplay is false", () => {
-    let newProject = TEST_PROJECT;
+    let newProject = test_project.TEST_PROJECT;
     newProject.coverInDisplay = false;
     const wrapper = factory({ project: newProject });
     expect(wrapper.getComponent(LameGallery).props()).toEqual({
@@ -71,13 +71,13 @@ describe("The Project Menu Display", () => {
   });
 
   it('does not show the "Links" section if the links array is empty', () => {
-    const wrapper = factory({ project: TEST_PROJECT }); // Links array is empty by default
+    const wrapper = factory({ project: test_project.TEST_PROJECT }); // Links array is empty by default
     expect(wrapper.find("#project-links").exists()).toBe(false);
     wrapper.unmount();
   });
 
   it('shows the "Links" section if the links array is not empty', () => {
-    let newProject = TEST_PROJECT;
+    let newProject = test_project.TEST_PROJECT;
     let links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
@@ -93,7 +93,7 @@ describe("The Project Menu Display", () => {
   });
 
   it("sources the proper link images if the links array is not empty", () => {
-    let newProject = TEST_PROJECT;
+    let newProject = test_project.TEST_PROJECT;
     let links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
@@ -155,7 +155,7 @@ describe("The Project Menu Display", () => {
   });
 
   it("sources the proper link href if the links array is not empty", () => {
-    let newProject = TEST_PROJECT;
+    let newProject = test_project.TEST_PROJECT;
     let links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
@@ -210,7 +210,7 @@ describe("The Project Menu Display", () => {
   });
 
   it("populates Hackaday link if specified Hackaday ID is not in array", () => {
-    let newProject = TEST_PROJECT;
+    let newProject = test_project.TEST_PROJECT;
     let links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
@@ -242,7 +242,7 @@ describe("The Project Menu Display", () => {
   });
 
   it("populates Hackaday link if another Hackaday link is in array, but not specified Hackaday ID", () => {
-    let newProject = TEST_PROJECT;
+    let newProject = test_project.TEST_PROJECT;
     let links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
@@ -279,7 +279,7 @@ describe("The Project Menu Display", () => {
   });
 
   it("does not populates Hackaday link if specified Hackaday ID is in the links array already", () => {
-    let newProject = TEST_PROJECT;
+    let newProject = test_project.TEST_PROJECT;
     let links = [
       {
         url: "https://github.com/lamemakes/lame-site/",

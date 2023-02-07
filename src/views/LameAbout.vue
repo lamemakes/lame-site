@@ -22,6 +22,7 @@ import { defineComponent, inject, ref } from "vue";
 import LameContactInfo from "../components/LameContactInfo.vue";
 import LameImage from "../components/LameImage.vue";
 import type { About } from "../types/about.interface";
+import backendUtils from "../utils/backend";
 
 export default defineComponent({
   components: { LameContactInfo, LameImage },
@@ -29,18 +30,9 @@ export default defineComponent({
     const host = inject("host");
     const aboutEndpoint = host + "/about.json";
 
-    const about = ref<About>();
-    const loadAbout = async (): Promise<void> => {
-      try {
-        const data = await fetch(aboutEndpoint);
-        if (!data.ok) {
-          throw Error("Failed to get about data!");
-        }
-        let tempAbout = await data.json();
-        about.value = tempAbout.about;
-      } catch (error) {
-        console.error(error);
-      }
+    const about = ref<About | undefined>();
+    const loadAbout = async () => {
+      about.value = await backendUtils.loadAbout();
     };
 
     loadAbout();
