@@ -1,6 +1,6 @@
 // Mainly used for doing *.json pulls from the host.
 
-import type { AlbumOfTheMonth } from "../types/album.interface";
+import type { AlbumOfTheMonthContainer } from "../types/album.interface";
 import type { Image } from "../types/image.interface";
 import type { Project } from "../types/projects.interface";
 import type { About } from "../types/about.interface";
@@ -24,7 +24,7 @@ const loadProjects = async (): Promise<Project[]> => {
   }
 };
 
-const loadAlbum = async (): Promise<AlbumOfTheMonth | undefined> => {
+const loadAlbum = async (): Promise<AlbumOfTheMonthContainer | undefined> => {
   try {
     const host = inject("host");
     const albumEndpoint = host + "/music.json";
