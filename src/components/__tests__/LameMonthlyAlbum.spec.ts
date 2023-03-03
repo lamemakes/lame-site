@@ -7,12 +7,24 @@ import backendUtils from "../../utils/backend";
 import dateUtils from "../../utils/date";
 
 const TEST_MUSIC = {
-  name: "Lost The Album",
-  artist: "Cool Calm Pete",
-  spotifyEmbedHtml:
-    '<iframe style="border-radius: 12px" src="https://open.spotify.com/embed/album/0SVnQiFDcdqgQqtrZugu7R?utm_source=generator" width="90%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>',
-  albumCoverColor: "#7198A3",
-};
+    "current" : {
+        "name": "Anime, Trauma and Divorce",
+        "artist": "Open Mike Eagle",
+        "spotifyEmbedHtml": "<iframe style='border-radius:12px' src='https://open.spotify.com/embed/album/23SV7P5U8oF3EJfkdW08wO?utm_source=generator' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>",
+        "albumCoverColor": "#E57DA4",
+        "month": "2023-03"
+    },
+    "previous": [
+        {
+            "name": "Lost The Album",
+            "artist": "Cool Calm Pete",
+            "spotifyEmbedHtml": "<iframe style='border-radius: 12px' src='https://open.spotify.com/embed/album/0SVnQiFDcdqgQqtrZugu7R?utm_source=generator' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy' ></iframe>",
+            "albumCoverColor": "#7198A3",
+            "month": "2023-02"
+        }
+    ]
+}
+  
 
 vi.spyOn(backendUtils, "loadAlbum").mockResolvedValue(TEST_MUSIC);
 
@@ -132,7 +144,7 @@ describe("The Album of the Month", () => {
     expect(wrapper.find("#name-artist").exists()).toBe(true);
     expect(wrapper.find("#name-artist").isVisible()).toBe(true);
     expect(wrapper.find("#name-artist").text()).toEqual(
-      TEST_MUSIC.name + " by " + TEST_MUSIC.artist
+      TEST_MUSIC.current.name + " by " + TEST_MUSIC.current.artist
     );
 
     wrapper.unmount();
@@ -149,13 +161,8 @@ describe("The Album of the Month", () => {
 
     expect(wrapper.find("#spotify-container").exists()).toBe(true);
     expect(wrapper.find("#spotify-container").isVisible()).toBe(true);
-    console.log(
-      "**" + wrapper.find("#spotify-container").element.innerHTML + "**"
-    );
-    console.log("----");
-    console.log("**" + TEST_MUSIC.spotifyEmbedHtml + "**");
     expect(wrapper.find("#spotify-container").element.innerHTML).toEqual(
-      TEST_MUSIC.spotifyEmbedHtml
+      TEST_MUSIC.current.spotifyEmbedHtml
     ); // When converted to HTML, double quotes become single.
 
     wrapper.unmount();
