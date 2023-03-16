@@ -35,7 +35,7 @@
           </li>
         </ul>
       </div>
-      <div v-if="project.images.length > 0" id="project-gallery">
+      <div v-if="project.coverInDisplay && project.images.length > 0 || !project.coverInDisplay && project.images.length > 1" id="project-gallery">
         <h2>Gallery</h2>
         <LameGallery :imageArray="imageArray" />
       </div>
@@ -130,7 +130,7 @@ export default defineComponent({
   justify-content: center;
   grid-template-columns: 100%;
   width: 60%;
-  padding: 15px;
+  padding: 15px 3vw;
   border-radius: 20px;
   :deep(h2) {
     text-align: center;

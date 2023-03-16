@@ -103,11 +103,10 @@ export default defineComponent({
 }
 
 #main-img {
-  width: 90%;
-  max-height: 30%;
+  width: inherit;
   img {
-    object-fit: cover;
-    width: 90%;
+    max-width: 90%;
+    max-height: 90%;
   }
 }
 

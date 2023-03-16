@@ -31,6 +31,7 @@ export default defineComponent({
       "hardware",
       "software",
       "art",
+      "rant"
     ];
 
     // Sometimes tag arrays come in that are empty strings (or if they're too long for some reason), filter them out.
@@ -104,6 +105,10 @@ export default defineComponent({
 
 .art {
   background-color: #ff668c;
+}
+
+.rant {
+  background-color: #c66f92;
 }
 
 .other {

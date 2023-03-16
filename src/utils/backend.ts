@@ -66,7 +66,7 @@ const loadAbout = async (): Promise<About | undefined> => {
     if (!data.ok) {
       throw Error("Failed to get about data!");
     }
-    return await data.json();
+    return (await data.json()).about;
   } catch (error) {
     console.error(error);
     return undefined;

@@ -28,7 +28,6 @@ export default defineComponent({
   components: { LameContactInfo, LameImage },
   setup() {
     const host = inject("host");
-    const aboutEndpoint = host + "/about.json";
 
     const about = ref<About | undefined>();
     const loadAbout = async () => {
