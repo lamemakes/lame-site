@@ -27,8 +27,6 @@ import backendUtils from "../utils/backend";
 export default defineComponent({
   components: { LameContactInfo, LameImage },
   setup() {
-    const host = inject("host");
-
     const about = ref<About | undefined>();
     const loadAbout = async () => {
       about.value = await backendUtils.loadAbout();
