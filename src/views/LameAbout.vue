@@ -67,7 +67,7 @@ export default defineComponent({
     object-fit: cover;
     height: 100%;
     max-width: 100%;
-    border-radius: 5%;
+    border-radius: var(--app-border-rad)
   }
 }
 
@@ -93,7 +93,7 @@ export default defineComponent({
     width: 100%;
     max-height: 100%;
     min-height: 40%;
-    border-radius: 5%;
+    border-radius: var(--app-border-rad);
   }
 }
 

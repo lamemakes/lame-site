@@ -131,7 +131,7 @@ export default defineComponent({
   grid-template-columns: 100%;
   width: 60%;
   padding: 15px 3vw;
-  border-radius: 20px;
+  border-radius: var(app-border-rad);
   :deep(h2) {
     text-align: center;
     padding-bottom: 8px;
