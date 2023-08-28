@@ -4,7 +4,7 @@
       v-for="tag in tags"
       :key="tag"
       class="tag"
-      :class="getTagClass(tag)"
+      :class="tagUtils.getTagClass(route, tag)"
       @click.prevent="router.push({ path: '/projects', query: { tags: tag.replace(' ', '-')}})"
     >
       <p>{{ tag }}</p>
@@ -15,6 +15,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import SUPPORTED_TAGS from "../constants/tags";
+import tagUtils from "../utils/tags";
 import { useRouter, useRoute } from "vue-router";
 import type { PropType } from "vue";
 
@@ -40,19 +41,6 @@ export default defineComponent({
       );
     }
 
-    // Gets the class string of a tag depending on if it's valid and active
-    const getTagClass = (tag: string): string => {
-      let formattedTag = tag.replace(' ', '-')
-
-      let tagClass = SUPPORTED_TAGS.includes(tag) ? `${formattedTag}-tag` : 'other-tag';
-
-      if (route.query.tags && (route.query.tags === tag || route.query.tags.includes(formattedTag))) {
-        tagClass = `${tagClass} active-tag`
-      }
-
-      return tagClass;
-    }
-
     // Put the project status tags in the front
     const sortTags = (tag1: string, tag2: string) => {
       if (tag1.includes(" project")) {
@@ -66,77 +54,13 @@ export default defineComponent({
 
     tagsIn.value.sort(sortTags);
 
-    return { tagsIn, SUPPORTED_TAGS, router, getTagClass };
+    return { tagsIn, SUPPORTED_TAGS, router, route, tagUtils };
   },
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="css">
 .tag-container {
   display: flex;
-}
-
-.tag {
-  height: 15px;
-  width: fit-content;
-  border-radius: 15px;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-  margin: 4px;
-  color: rgb(96, 96, 96);
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  p {
-    white-space: nowrap;
-  }
-}
-
-.tag:hover {
-  -webkit-box-shadow: 0 0 20px var(--main-color);
-  -moz-box-shadow: 0 0 20px var(--main-color);
-  box-shadow: 0 0 20px var(--main-color);
-}
-
-.active-tag {
-  -webkit-box-shadow: 0 0 20px var(--main-color);
-  -moz-box-shadow: 0 0 20px var(--main-color);
-  box-shadow: 0 0 20px var(--main-color);
-}
-
-.completed-project-tag {
-  background-color: #6feb96;
-}
-
-.ongoing-project-tag {
-  background-color: #ffb566;
-}
-
-.researching-project-tag {
-  background-color: #7066ff;
-}
-
-.scrapped-project-tag {
-  background-color: #ff4d4d;
-}
-.hardware-tag {
-  background-color: #667aff;
-}
-
-.software-tag {
-  background-color: #d466ff;
-}
-
-.art-tag {
-  background-color: #ff668c;
-}
-
-.rant-tag {
-  background-color: #c66f92;
-}
-
-.other-tag {
-  background-color: #66c9ff;
 }
 </style>

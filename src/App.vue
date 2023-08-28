@@ -1,10 +1,12 @@
 <template>
-  <header>
-    <LameDesktopNav v-if="!mobileView" />
-    <LameMobileNav v-if="mobileView" />
-  </header>
-  <div id="main-view">
-    <router-view />
+  <div>
+    <header>
+      <LameDesktopNav v-if="!mobileView" />
+      <LameMobileNav v-if="mobileView" />
+    </header>
+    <div id="main-view">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -32,15 +34,12 @@ export default defineComponent({
 });
 </script>
 
+<style src="./styles.scss" />
 <style lang="scss">
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  // Global vars
-  --main-color: #cbcbcb; // General text color
-  --head-color: #ececec; // Color of headings
-  --accent-color: #42b983; // The green accent color
 }
 
 #app {
@@ -105,6 +104,13 @@ header {
   text-shadow: vertical-shadow blur color;
 }
 
+.page-heading {
+  font-size: 40px;
+  text-align: center;
+  color: var(--head-color);
+  text-shadow: vertical-shadow blur color;
+}
+
 .sub-heading {
   font-size: 30px;
   color: var(--main-color);
@@ -112,11 +118,76 @@ header {
 
 // The styling for the partly transparent grey box container:
 .lame-box {
-  border-radius: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: rgba(43, 43, 43, 0.8);
-}
+    border-radius: var(--app-border-rad);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(43, 43, 43, 1);
+  }
+
+// Styling for project tags
+.tag {
+    height: 15px;
+    width: fit-content;
+    border-radius: 15px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    margin: 4px;
+    color: rgb(96, 96, 96);
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    p {
+      white-space: nowrap;
+    }
+  }
+  
+  .tag:hover {
+    -webkit-box-shadow: 0 0 20px var(--main-color);
+    -moz-box-shadow: 0 0 20px var(--main-color);
+    box-shadow: 0 0 20px var(--main-color);
+  }
+  
+  .active-tag {
+    -webkit-box-shadow: 0 0 20px var(--main-color);
+    -moz-box-shadow: 0 0 20px var(--main-color);
+    box-shadow: 0 0 20px var(--main-color);
+  }
+  
+  .completed-project-tag {
+    background-color: #6feb96;
+  }
+  
+  .ongoing-project-tag {
+    background-color: #ffb566;
+  }
+  
+  .researching-project-tag {
+    background-color: #7066ff;
+  }
+  
+  .scrapped-project-tag {
+    background-color: #ff4d4d;
+  }
+  .hardware-tag {
+    background-color: #667aff;
+  }
+  
+  .software-tag {
+    background-color: #d466ff;
+  }
+  
+  .art-tag {
+    background-color: #ff668c;
+  }
+  
+  .rant-tag {
+    background-color: #c66f92;
+  }
+  
+  .other-tag {
+    background-color: #66c9ff;
+  }
 
 @media (min-width: 0px) and (max-width: 850px) {
   #app {

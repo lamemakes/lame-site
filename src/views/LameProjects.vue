@@ -6,7 +6,7 @@
   />
   <div v-else>
     <div class="title-desc">
-      <h1 class="heading">Projects</h1>
+      <h1 class="page-heading">Projects</h1>
     </div>
     <div class="list-container">
       <div class="tag-sort-container">
@@ -29,6 +29,7 @@ import LameProjectMenuItem from "../components/LameProjectItem.vue";
 import LameProjectDisplay from "../components/LameProjectDisplay.vue";
 import LameProjectSort from "../components/LameProjectSort.vue";
 import backendUtils from "../utils/backend";
+import tagUtils from "../utils/tags";
 
 import type { Project } from "../types/projects.interface";
 import type { LocationQueryValue } from "vue-router";
@@ -73,7 +74,7 @@ export default defineComponent({
     const filterProjectsByTags = (tags: LocationQueryValue | LocationQueryValue[], projects: Project[]): Project[] => {
       const filteredProjects = projects.filter(
         (project) => { 
-          const tagList = Array.isArray(tags) ? tags : [tags];
+          const tagList = tagUtils.queryToTags(route);
           let matches = 0
           for (let tag of tagList) {
             if (!tag) {
@@ -119,11 +120,7 @@ export default defineComponent({
 
     // The projects will load after params are specified. When this update happens, confirm the can see the selected project.
     watch(projects, () => {
-<<<<<<< HEAD
-      if (currentParams.value) updateSelectedProjects();
-=======
       if (currentProject) updateSelectedProjects();
->>>>>>> d2bb90f (Initial implementation of project filtering)
     });
 
     // load the projects
