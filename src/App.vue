@@ -121,7 +121,7 @@ header {
     border-radius: var(--app-border-rad);
     margin-top: 10px;
     margin-bottom: 10px;
-    background-color: rgba(43, 43, 43, 1);
+    background-color: var(--dark-grey);
   }
 
 // Styling for project tags
@@ -133,7 +133,7 @@ header {
     display: flex;
     align-items: center;
     margin: 4px;
-    color: rgb(96, 96, 96);
+    color: var(--dark-text);
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
@@ -142,13 +142,7 @@ header {
     }
   }
   
-  .tag:hover {
-    -webkit-box-shadow: 0 0 20px var(--main-color);
-    -moz-box-shadow: 0 0 20px var(--main-color);
-    box-shadow: 0 0 20px var(--main-color);
-  }
-  
-  .active-tag {
+  .glow, .tag:hover{
     -webkit-box-shadow: 0 0 20px var(--main-color);
     -moz-box-shadow: 0 0 20px var(--main-color);
     box-shadow: 0 0 20px var(--main-color);
@@ -163,7 +157,7 @@ header {
   }
   
   .researching-project-tag {
-    background-color: #7066ff;
+    background-color: #857cff;
   }
   
   .scrapped-project-tag {

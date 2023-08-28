@@ -5,19 +5,21 @@ import SUPPORTED_TAGS from "../constants/tags";
 const queryToTags = (route: RouteLocationNormalizedLoaded): string[] => {
     const LQVTempArray = (Array.isArray(route.query.tags) ? route.query.tags : [route.query.tags])
 
+    console.error(LQVTempArray.map((tag) => tag ? tag.toString() : '').filter((tag) => tag !== ''))
+
     return LQVTempArray.map((tag) => tag ? tag.toString() : '').filter((tag) => tag !== '') 
 }
 
 // Gets the class string of a tag depending on if it's valid and active (uses the route to determine this)
 const getTagClass = (route: RouteLocationNormalizedLoaded, tag: string): string => {
-    let formattedTag = tag.replace(' ', '-')
+    const formattedTag = tag.replace(' ', '-')
 
     console.error(formattedTag);
 
     let tagClass = SUPPORTED_TAGS.includes(tag.replace('-', ' ')) ? `${formattedTag}-tag` : 'other-tag';
 
     if (route.query.tags && (route.query.tags === tag || route.query.tags.includes(tag))) {
-        tagClass = `${tagClass} active-tag`
+        tagClass = `${tagClass} glow`
     }
 
     console.error("TAG CLASS")

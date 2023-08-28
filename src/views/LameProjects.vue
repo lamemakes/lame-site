@@ -120,7 +120,7 @@ export default defineComponent({
 
     // The projects will load after params are specified. When this update happens, confirm the can see the selected project.
     watch(projects, () => {
-      if (currentProject) updateSelectedProjects();
+      if (currentProject.value) updateSelectedProjects();
     });
 
     // load the projects
