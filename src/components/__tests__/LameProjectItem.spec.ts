@@ -45,9 +45,9 @@ describe("The Project Menu Item", () => {
 
   it("truncates a description > 150 characters", () => {
     // Truncation occurs at the space before the offending 150th char, where ellipsis are added (and commas are removed if they exist in the last char position). All summaries should be =< 120 chars anyway
-    let longSummary =
+    const longSummary =
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-    let newProject = test_project.TEST_PROJECT;
+    const newProject = test_project.TEST_PROJECT;
     newProject.summary = longSummary;
     const wrapper = factory({ project: newProject });
     expect(wrapper.find(".proj-summary").text()).toEqual(

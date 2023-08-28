@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref } from "vue";
+import { defineComponent, ref } from "vue";
 import type { Image } from "../types/image.interface";
 import LameGallery from "../components/LameGallery.vue";
 import backendUtils from "../utils/backend";

@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, inject, watch } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import LameProjectMenuItem from "../components/LameProjectItem.vue";
 import LameProjectDisplay from "../components/LameProjectDisplay.vue";
 import backendUtils from "../utils/backend";
@@ -36,9 +36,6 @@ export default defineComponent({
     LameProjectDisplay,
   },
   setup() {
-    const host = inject("host");
-    const projectsEndpoint = host + "/projects.json";
-
     const projects = ref([] as Project[]);
 
     // Pull projects from projects.json static file (auto generated)
@@ -80,7 +77,7 @@ export default defineComponent({
 
     // The projects will load after params are specified. When this update happens, confirm the can see the selected project.
     watch(projects, () => {
-      if (currentParams) updateSelectedProjects();
+      if (currentParams.value) updateSelectedProjects();
     });
 
     // load the projects

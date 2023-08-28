@@ -16,7 +16,7 @@
       </div>
       <div id="nav-container">
         <div
-          v-if="imageArray.length > imageIndex + 1"
+          v-if="imageArrayIn.length > imageIndex + 1"
           id="next-pic"
           @click="imgNav(1)"
           class="nav-btn"
@@ -39,7 +39,7 @@
 </template>
 <script lang="ts">
 import type { Image } from "../types/image.interface";
-import type { PropType, Ref } from "vue";
+import type { PropType } from "vue";
 import LameImage from "./LameImage.vue";
 import { defineComponent, ref } from "vue";
 
@@ -58,7 +58,7 @@ export default defineComponent({
     LameImage,
   },
   setup(props) {
-    const imageArray = ref(props.imageArray);
+    const imageArrayIn = ref(props.imageArray);
     const imageIndex = ref(props.selectedIndex);
     // This is a somewhat dirty was to do this, just having an overall v-if. Will likely refactor.
     const openLiteBox = ref(true);
@@ -79,7 +79,7 @@ export default defineComponent({
       openLiteBox.value = false;
     };
 
-    return { imageArray, imageIndex, openLiteBox, imgNav, closeLiteBox };
+    return { imageArrayIn, imageIndex, openLiteBox, imgNav, closeLiteBox };
   },
 });
 </script>

@@ -1,17 +1,19 @@
 <template>
-  <LameLiteBox
-    id="lite-box"
-    v-if="openLiteBox"
-    :imageArray="imageArray"
-    :selectedIndex="selectedIndex"
-  />
-  <div id="gallery">
-    <div
-      v-for="(image, index) in imageArray"
-      :key="image.url"
-      @click="selectImg(index)"
-    >
-      <LameImage :imageUrl="image.url" :thumbnail="true" />
+  <div>
+    <LameLiteBox
+      id="lite-box"
+      v-if="openLiteBox"
+      :imageArray="imageArrayIn"
+      :selectedIndex="selectedIndex"
+    />
+    <div id="gallery">
+      <div
+        v-for="(image, index) in imageArray"
+        :key="image.url"
+        @click="selectImg(index)"
+      >
+        <LameImage :imageUrl="image.url" :thumbnail="true" />
+      </div>
     </div>
   </div>
 </template>
@@ -35,7 +37,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const imageArray = ref(props.imageArray);
+    const imageArrayIn = ref(props.imageArray);
 
     // Values for the LiteBox
     const openLiteBox = ref(false);
@@ -52,7 +54,7 @@ export default defineComponent({
       openLiteBox.value = true;
     };
 
-    return { imageArray, openLiteBox, selectedIndex, selectImg };
+    return { imageArrayIn, openLiteBox, selectedIndex, selectImg };
   },
 });
 </script>

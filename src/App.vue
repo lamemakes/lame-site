@@ -21,8 +21,6 @@ export default defineComponent({
     LameMobileNav,
   },
   setup() {
-    const DESKTOP_MIN_WIDTH = 850; // Value used before switching to mobile view
-
     const mobileView = ref(viewUtils.isMobileView());
 
     window.addEventListener("resize", () => {

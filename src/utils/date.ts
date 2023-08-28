@@ -1,7 +1,7 @@
 import type { Project } from "@/types/projects.interface";
 
 // Gets the date in the format of "<worded month> <number day>, <number year>"
-const getPrettyDate = (dateIn: Date): String => {
+const getPrettyDate = (dateIn: Date): string => {
   const day = (dateIn.getDate() + 1).toString(); // One is added due to the weirdness of JS String => Date parsing. See https://stackoverflow.com/questions/7556591/is-the-javascript-date-object-always-one-day-off
   const month = getLongMonth(dateIn.getMonth());
   const year = dateIn.getFullYear().toString();
@@ -20,7 +20,7 @@ const sortProjectDates = (arrayIn: Project[]): Project[] => {
 };
 
 // Gets the worded month from the number month
-const getLongMonth = (month: number): String => {
+const getLongMonth = (month: number): string => {
   const months = [
     "January",
     "February",

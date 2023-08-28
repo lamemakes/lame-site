@@ -1,23 +1,23 @@
 <template>
   <router-link
-    :to="{ name: 'projects', params: { projectId: project.id } }"
+    :to="{ name: 'projects', params: { projectId: projectIn.id } }"
     class="proj-container lame-box"
   >
     <div class="img-container">
       <div class="proj-thumbnail">
         <LameImage
-          v-if="project.images"
-          :imageUrl="project.images[project.coverImageIndex].url"
+          v-if="projectIn.images"
+          :imageUrl="projectIn.images[projectIn.coverImageIndex].url"
           :thumbnail="true"
         />
       </div>
     </div>
     <div class="proj-info">
-      <h2 class="proj-name">{{ project.name.toUpperCase() }}</h2>
+      <h2 class="proj-name">{{ projectIn.name.toUpperCase() }}</h2>
       <p class="proj-date">{{ formDate }}</p>
-      <p class="proj-summary">{{ formatSummary(project.summary) }}</p>
+      <p class="proj-summary">{{ formatSummary(projectIn.summary) }}</p>
       <div id="tags-container">
-        <LameProjectTags :tags="project.tags" />
+        <LameProjectTags :tags="projectIn.tags" />
       </div>
     </div>
   </router-link>
@@ -43,9 +43,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const project = props.project;
+    const projectIn = props.project;
 
-    const formDate = dateUtils.getPrettyDate(new Date(project.date));
+    const formDate = dateUtils.getPrettyDate(new Date(projectIn.date));
 
     // Format the summary to fit in the box (shouldn't be this long anyway)
     const SUMMARY_MAX_LEN = 150;
@@ -68,7 +68,7 @@ export default defineComponent({
       }
     };
 
-    return { project, formDate, formatSummary };
+    return { projectIn, formDate, formatSummary };
   },
 });
 </script>
