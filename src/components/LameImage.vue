@@ -21,7 +21,7 @@ export default defineComponent({
   },
   setup(props) {
     const inImageUrl = toRef(props, "imageUrl");
-    const imageUrl = ref(inImageUrl.value);
+    const imageUrlRef = ref(inImageUrl.value);
 
     const mobileView = ref(viewUtils.isMobileView());
 
@@ -45,17 +45,17 @@ export default defineComponent({
             inImageUrl.value +
             '"! Expected .webp...'
         );
-        imageUrl.value = inImageUrl.value;
+        imageUrlRef.value = inImageUrl.value;
       }
 
       let filename = inImageUrl.value.slice(0, inImageUrl.value.length - 5);
 
       if (props.thumbnail) {
-        imageUrl.value = filename + "_thumb.webp";
+        imageUrlRef.value = filename + "_thumb.webp";
       } else if (mobileView.value) {
-        imageUrl.value = filename + "_mobile.webp";
+        imageUrlRef.value = filename + "_mobile.webp";
       } else {
-        imageUrl.value = filename + ".webp";
+        imageUrlRef.value = filename + ".webp";
       }
     };
 
@@ -79,7 +79,7 @@ export default defineComponent({
       { flush: "pre", immediate: true, deep: true }
     );
 
-    return { imageUrl };
+    return { imageUrlRef };
   },
 });
 </script>

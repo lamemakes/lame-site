@@ -16,7 +16,7 @@ const loadProjects = async (): Promise<Project[]> => {
     if (!data.ok) {
       throw Error("Failed to get project data!");
     }
-    let temp_projects = await data.json();
+    const temp_projects = await data.json();
     return dateUtils.sortProjectDates(temp_projects.projects); // Return the array of projects sorted by date (might add user customizable sorting later...)
   } catch (error) {
     console.error(error);
@@ -33,7 +33,7 @@ const loadAlbum = async (): Promise<AlbumOfTheMonthContainer | undefined> => {
     if (!data.ok) {
       throw Error("Failed to get album of the month data!");
     }
-    let tempAlbumOfTheMonth = await data.json();
+    const tempAlbumOfTheMonth = await data.json();
     return tempAlbumOfTheMonth.music.albumOfTheMonth;
   } catch (error) {
     console.error(error);

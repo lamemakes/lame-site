@@ -61,7 +61,7 @@ describe("The Project Menu Display", () => {
   });
 
   it("removes the thumbnail picture from the picture array if coverInDisplay is false", () => {
-    let newProject = test_project.TEST_PROJECT;
+    const newProject = test_project.TEST_PROJECT;
     newProject.coverInDisplay = false;
     const wrapper = factory({ project: newProject });
     expect(wrapper.getComponent(LameGallery).props()).toEqual({
@@ -77,8 +77,8 @@ describe("The Project Menu Display", () => {
   });
 
   it('shows the "Links" section if the links array is not empty', () => {
-    let newProject = test_project.TEST_PROJECT;
-    let links = [
+    const newProject = test_project.TEST_PROJECT;
+    const links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
         type: "github",
@@ -93,8 +93,8 @@ describe("The Project Menu Display", () => {
   });
 
   it("sources the proper link images if the links array is not empty", () => {
-    let newProject = test_project.TEST_PROJECT;
-    let links = [
+    const newProject = test_project.TEST_PROJECT;
+    const links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
         type: "github",
@@ -126,7 +126,7 @@ describe("The Project Menu Display", () => {
       { project: newProject },
       { provide: { host: "https://lamemakes.com" } }
     ); // Links array is empty by default
-    let renderedIcons = wrapper
+    const renderedIcons = wrapper
       .findAll("img")
       .filter((domItem) => domItem.element.className === "link-icon");
 
@@ -158,8 +158,8 @@ describe("The Project Menu Display", () => {
   });
 
   it("sources the proper link href if the links array is not empty", () => {
-    let newProject = test_project.TEST_PROJECT;
-    let links = [
+    const newProject = test_project.TEST_PROJECT;
+    const links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
         type: "github",
@@ -188,7 +188,7 @@ describe("The Project Menu Display", () => {
     ];
     newProject.links = links;
     const wrapper = factory({ project: newProject }); // Links array is empty by default
-    let renderedLinks = wrapper
+    const renderedLinks = wrapper
       .findAll("a")
       .filter((domItem) => domItem.element.className === "link-item");
     expect(renderedLinks[0].exists()).toBe(true);
@@ -213,8 +213,8 @@ describe("The Project Menu Display", () => {
   });
 
   it("populates Hackaday link if specified Hackaday ID is not in array", () => {
-    let newProject = test_project.TEST_PROJECT;
-    let links = [
+    const newProject = test_project.TEST_PROJECT;
+    const links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
         type: "github",
@@ -226,13 +226,13 @@ describe("The Project Menu Display", () => {
         title: "Instagram",
       },
     ];
-    let hackaday = { id: "5138008", private: false, updateFeed: false };
+    const hackaday = { id: "5138008", private: false, updateFeed: false };
 
     newProject.links = links;
     newProject.hackaday = hackaday;
 
     const wrapper = factory({ project: newProject }); // Links array is empty by default
-    let renderedLinks = wrapper
+    const renderedLinks = wrapper
       .findAll("a")
       .filter((domItem) => domItem.element.className === "link-item");
 
@@ -245,8 +245,8 @@ describe("The Project Menu Display", () => {
   });
 
   it("populates Hackaday link if another Hackaday link is in array, but not specified Hackaday ID", () => {
-    let newProject = test_project.TEST_PROJECT;
-    let links = [
+    const newProject = test_project.TEST_PROJECT;
+    const links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
         type: "github",
@@ -263,13 +263,13 @@ describe("The Project Menu Display", () => {
         title: "Instagram",
       },
     ];
-    let hackaday = { id: "5138008", private: false, updateFeed: false };
+    const hackaday = { id: "5138008", private: false, updateFeed: false };
 
     newProject.links = links;
     newProject.hackaday = hackaday;
 
     const wrapper = factory({ project: newProject }); // Links array is empty by default
-    let renderedLinks = wrapper
+    const renderedLinks = wrapper
       .findAll("a")
       .filter((domItem) => domItem.element.className === "link-item");
 
@@ -282,8 +282,8 @@ describe("The Project Menu Display", () => {
   });
 
   it("does not populates Hackaday link if specified Hackaday ID is in the links array already", () => {
-    let newProject = test_project.TEST_PROJECT;
-    let links = [
+    const newProject = test_project.TEST_PROJECT;
+    const links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
         type: "github",
@@ -300,13 +300,13 @@ describe("The Project Menu Display", () => {
         title: "Instagram",
       },
     ];
-    let hackaday = { id: "5138008", private: false, updateFeed: false };
+    const hackaday = { id: "5138008", private: false, updateFeed: false };
 
     newProject.links = links;
     newProject.hackaday = hackaday;
 
     const wrapper = factory({ project: newProject }); // Links array is empty by default
-    let renderedLinks = wrapper
+    const renderedLinks = wrapper
       .findAll("a")
       .filter((domItem) => domItem.element.className === "link-item");
 

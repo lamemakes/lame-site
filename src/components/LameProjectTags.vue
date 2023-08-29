@@ -22,7 +22,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const tags = ref(props.tags);
+    const tagsIn = ref(props.tags);
     const SUPPORTED_TAGS = [
       "researching project",
       "ongoing project",
@@ -36,8 +36,8 @@ export default defineComponent({
 
     // Sometimes tag arrays come in that are empty strings (or if they're too long for some reason), filter them out.
     const TAG_MAX_LEN = 20;
-    if (tags.value.length > 0) {
-      tags.value = tags.value.filter(
+    if (tagsIn.value.length > 0) {
+      tagsIn.value = tagsIn.value.filter(
         (tag) => tag != "" && tag.length <= TAG_MAX_LEN
       );
     }
@@ -53,9 +53,9 @@ export default defineComponent({
       }
     };
 
-    tags.value.sort(sortTags);
+    tagsIn.value.sort(sortTags);
 
-    return { tags, SUPPORTED_TAGS };
+    return { tagsIn, SUPPORTED_TAGS };
   },
 });
 </script>

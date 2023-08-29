@@ -54,7 +54,7 @@ describe("The Project Menu Item", () => {
 
   it("properly sources all image thumbnails in the gallery", () => {
     const wrapper = factory({ imageArray: multiImageArray });
-    let images = wrapper.findAll("img");
+    const images = wrapper.findAll("img");
     expect(images[0].element.src).toEqual(
       "http://lamemakes.com/testpic_thumb.webp"
     );

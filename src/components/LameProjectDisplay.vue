@@ -6,23 +6,23 @@
           <img src="@/assets/buttons/back.png" />
         </router-link>
         <div id="project-title">
-          <h1 class="heading" id="project-name">{{ project.name }}</h1>
+          <h1 class="heading" id="project-name">{{ projectIn.name }}</h1>
           <p class="sub-heading" id="project-date">{{ formDate }}</p>
           <div id="tags-container">
-            <LameProjectTags :tags="project.tags" />
+            <LameProjectTags :tags="projectIn.tags" />
           </div>
         </div>
         <div id="header-spacer"></div>
       </div>
       <div id="project-info">
-        <div v-html="project.description" id="project-description"></div>
-        <div v-html="project.details" id="project-details"></div>
+        <div v-html="projectIn.description" id="project-description"></div>
+        <div v-html="projectIn.details" id="project-details"></div>
       </div>
-      <div id="project-links" v-if="project.links.length > 0">
+      <div id="project-links" v-if="projectIn.links.length > 0">
         <h2>Links</h2>
         <ul>
           <li
-            v-for="link in project.links"
+            v-for="link in projectIn.links"
             :key="link.title"
             class="link-container"
           >
@@ -35,7 +35,7 @@
           </li>
         </ul>
       </div>
-      <div v-if="project.coverInDisplay && project.images.length > 0 || !project.coverInDisplay && project.images.length > 1" id="project-gallery">
+      <div v-if="projectIn.coverInDisplay && projectIn.images.length > 0 || !projectIn.coverInDisplay && projectIn.images.length > 1" id="project-gallery">
         <h2>Gallery</h2>
         <LameGallery :imageArray="imageArray" />
       </div>
@@ -67,14 +67,14 @@ export default defineComponent({
   setup(props) {
     const host = inject("host");
 
-    const project = ref(props.project);
+    const projectIn = ref(props.project);
 
     // Format date to pretty string
-    const formDate = dateUtils.getPrettyDate(new Date(project.value.date));
+    const formDate = dateUtils.getPrettyDate(new Date(projectIn.value.date));
 
     // Filter out the cover image from the gallery if specified
     const filterCoverImage = (image: Image, index: number) => {
-      return index != project.value.coverImageIndex;
+      return index != projectIn.value.coverImageIndex;
     };
 
     const getLinkIcon = (type: string) => {
@@ -90,28 +90,28 @@ export default defineComponent({
       }
     };
 
-    const imageArray = !project.value.coverInDisplay
-      ? project.value.images.filter(filterCoverImage)
-      : project.value.images;
+    const imageArray = !projectIn.value.coverInDisplay
+      ? projectIn.value.images.filter(filterCoverImage)
+      : projectIn.value.images;
 
     // Auto-populate the hackaday link if the id is of type number & the link doesn't already exist in the link array.
     const hackadayProjectUrl = "https://hackaday.io/project/";
     if (
-      typeof project.value.hackaday.id === "string" &&
-      project.value.links.filter(
+      typeof projectIn.value.hackaday.id === "string" &&
+      projectIn.value.links.filter(
         (link) =>
           link.type === "hackaday" &&
-          link.url === hackadayProjectUrl + project.value.hackaday.id
+          link.url === hackadayProjectUrl + projectIn.value.hackaday.id
       ).length === 0
     ) {
-      project.value.links.push({
-        title: project.value.name + " on Hackaday.io",
+      projectIn.value.links.push({
+        title: projectIn.value.name + " on Hackaday.io",
         type: "hackaday",
-        url: hackadayProjectUrl + project.value.hackaday.id,
+        url: hackadayProjectUrl + projectIn.value.hackaday.id,
       });
     }
 
-    return { project, formDate, imageArray, getLinkIcon };
+    return { projectIn, formDate, imageArray, getLinkIcon };
   },
 });
 </script>

@@ -41,7 +41,7 @@ describe("The Image LiteBox", () => {
 
   it("properly sources single image in the LiteBox", () => {
     const wrapper = factory({ imageArray: oneImageArray, selectedIndex: 0 });
-    let mainImg = wrapper
+    const mainImg = wrapper
       .findAll("img")
       .filter((domItem) => domItem.element.id === "main-img")[0]; // Done this way as main image index is somewhat undpredictable when the nav icons exist sometimes based on index.
     expect(wrapper.getComponent(LameImage).props()).toEqual({

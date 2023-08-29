@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref } from "vue";
+import { defineComponent, ref } from "vue";
 import LameContactInfo from "../components/LameContactInfo.vue";
 import LameImage from "../components/LameImage.vue";
 import type { About } from "../types/about.interface";
@@ -27,8 +27,6 @@ import backendUtils from "../utils/backend";
 export default defineComponent({
   components: { LameContactInfo, LameImage },
   setup() {
-    const host = inject("host");
-
     const about = ref<About | undefined>();
     const loadAbout = async () => {
       about.value = await backendUtils.loadAbout();

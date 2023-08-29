@@ -69,7 +69,7 @@ describe("The Album of the Month", () => {
       (month) => months[month]
     );
 
-    let mockDate = new Date("2022-10-22");
+    const mockDate = new Date("2022-10-22");
     vi.setSystemTime(mockDate);
 
     const wrapper = await mount(LameMonthlyAlbum);
@@ -111,7 +111,7 @@ describe("The Album of the Month", () => {
       (month) => months[month]
     );
 
-    let mockDate = new Date("2022-10-22");
+    const mockDate = new Date("2022-10-22");
     vi.setSystemTime(mockDate);
 
     const wrapper = await mount(LameMonthlyAlbum);
