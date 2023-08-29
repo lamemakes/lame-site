@@ -41,6 +41,7 @@ jobs:
         host: ${{ secrets.LAME_SITE_SSH_ADDRESS }}
         username: ${{ secrets.LAME_SITE_SSH_USERNAME }}
         key: ${{ secrets.LAME_SITE_SSH_KEY }}
+        passphrase: ${{ secrets.LAME_SITE_SSH_KEY_PASS }}
         port: ${{ secrets.LAME_SITE_SSH_PORT }}
         source: "dist/*"
         target: ${{ secrets.LAME_SITE_ASSET_PATH }}
