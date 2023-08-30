@@ -23,26 +23,25 @@ jobs:
     - name: Install lame-site dependencies
       run: yarn
     
-    - name: Lint lame-site
+    - name: Build lame-site
       run: yarn build
 
     - name: Replace old assets
       uses: appleboy/ssh-action@v1.0.0
       with:
-        host: ${{ secrets.LAME_SITE_SSH_ADDRESS }}
+        host: lamemakes.com
         username: ${{ secrets.LAME_SITE_SSH_USERNAME }}
         key: ${{ secrets.LAME_SITE_SSH_KEY }}
         passphrase: ${{ secrets.LAME_SITE_SSH_KEY_PASS }}
         port: ${{ secrets.LAME_SITE_SSH_PORT }}
         script: rm -rf ${{ secrets.LAME_SITE_ASSET_PATH }}/assets/*
 
-    - name: Deploy index.html & favicon.ico assets to server
-      uses: appleboy/scp-action@master
+    - name: Deploy lame-site assets
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        host: ${{ secrets.LAME_SITE_SSH_ADDRESS }}
-        username: ${{ secrets.LAME_SITE_SSH_USERNAME }}
-        key: ${{ secrets.LAME_SITE_SSH_KEY }}
-        passphrase: ${{ secrets.LAME_SITE_SSH_KEY_PASS }}
-        port: ${{ secrets.LAME_SITE_SSH_PORT }}
-        source: "dist/*"
-        target: ${{ secrets.LAME_SITE_ASSET_PATH }}
+        server: ftp.lamemakes.com
+        username: ${{ secrets.LAME_SITE_FTP_USERNAME }}
+        password: ${{ secrets.LAME_SITE_FTP_PASSWORD }}
+        port: ${{ secrets.LAME_SITE_FTP_PORT }}
+        protocol: ftps
+        local-dir: ./dist/
