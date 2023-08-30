@@ -45,3 +45,4 @@ jobs:
         port: ${{ secrets.LAME_SITE_FTP_PORT }}
         protocol: ftps
         local-dir: ./dist/
+        server-dir: ./${{ secrets.LAME_SITE_ASSET_PATH }}/
