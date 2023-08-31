@@ -1,7 +1,7 @@
 <template>
   <div class="tag-container">
     <div
-      v-for="tag in tags"
+      v-for="tag in tagsIn"
       :key="tag"
       class="tag"
       :class="tagUtils.getTagClass(route, tag)"
@@ -31,13 +31,11 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute();
 
-    console.error(route.query);
-
     // Sometimes tag arrays come in that are empty strings (or if they're too long for some reason), filter them out.
     const TAG_MAX_LEN = 20;
     if (tagsIn.value.length > 0) {
       tagsIn.value = tagsIn.value.filter(
-        (tag) => tag != "" && tag.length <= TAG_MAX_LEN
+        (tag) => tag && tag.length <= TAG_MAX_LEN
       );
     }
 
@@ -53,6 +51,9 @@ export default defineComponent({
     };
 
     tagsIn.value.sort(sortTags);
+
+    console.error("FINAL TAGS")
+    console.error(tagsIn.value)
 
     return { tagsIn, SUPPORTED_TAGS, router, route, tagUtils };
   },

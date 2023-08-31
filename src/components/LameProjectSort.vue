@@ -12,34 +12,22 @@
             v-if="menuOpen"
             class="filter-tags-container"
         >
-            <!-- <span class="tag-select-text">active</span>
+            <span class="tag-select-text">tags</span>
             <div class="active-tags tag-select">
                 <div
-                    v-for="tag in activeTags"
+                    v-for="tag in SUPPORTED_TAGS"
                     :key="tag"
                     class="tag"
                     :class="tagUtils.getTagClass(route, tag)"
-                    @click.prevent="router.push({ path: '/projects', query: { tags: activeTags.filter((activeTag) => activeTag !== tag) }})"
+                    @click="toggleTag(tag.replace(' ', '-'))"
                 >
                     <p>{{ tag }}</p>
                 </div>
             </div>
-            <span class="tag-select-text">inactive</span>
-            <div class="inactive-tags tag-select">
-                <div
-                    v-for="tag in inactiveTags"
-                    :key="tag.replace('-', ' ')"
-                    class="tag"
-                    :class="tagUtils.getTagClass(route, tag)"
-                    @click.prevent="router.push({ path: '/projects', query: { tags: [tag, ...activeTags]}})"
-                >
-                    <p>{{ tag }}</p>
-                </div>
-            </div> -->
             <div></div>
             <div
-                v-if="route.query.tags"
                 class="tag"
+                :class="!route.query.tags ? 'inactive-remove' : 'active-remove'"
                 id="remove-tag-filter"
                 @click="router.push({ path: '/projects' })"
             >
@@ -51,37 +39,41 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from "vue";
-import LameProjectTags from "./LameProjectTags.vue";
 import tagUtils from "../utils/tags";
 import { useRoute, useRouter } from "vue-router";
 import SUPPORTED_TAGS from "../constants/tags";
 
 export default defineComponent({
-  components: {
-    LameProjectTags
-  },
   setup() {
     const router = useRouter();
     const route = useRoute();
 
-    const menuOpen = ref(false)
     const activeTags = ref([] as string[])
-    const inactiveTags = ref([] as string[])
 
     const populateTags = () => {
         activeTags.value = tagUtils.queryToTags(route)
         console.error("ACTIVE TAGS")
         console.error(activeTags.value)
-        console.error("INACTIVE TAGS")
-        console.error(inactiveTags.value)
-        inactiveTags.value = SUPPORTED_TAGS.filter((tag) => !activeTags.value.includes(tag))
     }
 
     populateTags()
 
-    // If the user comes to the page initially with query params,
-    // highlight the filter button to indicate active tags
-    const buttonGlow = ref(activeTags.value.length > 0);
+    const toggleTag = (tag: string) => {
+        console.error("TOGGLE TAG")
+        console.error(tag)
+        if (activeTags.value.includes(tag)) {
+            if (activeTags.value.length > 1) {
+                router.push({ path: '/projects', query: { tags: activeTags.value.filter((activeTag) => activeTag !== tag) }})
+            } else {
+                router.push({ path: '/projects'})
+            }
+        } else {
+            router.push({ path: '/projects', query: { tags: [...activeTags.value, tag] }})
+        }
+    }
+
+    // If there are active filtering tags, the filtering menu should be shown on load
+    const menuOpen = ref(activeTags.value.length > 0)
 
     watch(
       route,
@@ -91,7 +83,7 @@ export default defineComponent({
       { flush: "pre", immediate: true, deep: true }
     );
 
-    return { SUPPORTED_TAGS, router, route, activeTags, inactiveTags, tagUtils, menuOpen, buttonGlow }
+    return { SUPPORTED_TAGS, router, route, activeTags, tagUtils, menuOpen, toggleTag }
   }
 });
 </script>
@@ -140,7 +132,8 @@ export default defineComponent({
     display: flex;
     width: 90%;
     padding: 15px;
-    overflow-x: scroll;
+    height: 62px;
+    flex-wrap: wrap;
     border-radius: 100px;
 }
 
@@ -152,17 +145,56 @@ export default defineComponent({
 }
 
 #remove-tag-filter {
+    margin: 0px 25px 15px 0px;
     display: flex;
-    // color: var(--main-color);
-    // justify-content: center;
-    // background-color: var(--light-grey);
     justify-self: end;
-    background-color: var(--main-color);
-    color: var(--light-grey);
     margin-right: 10px;
 }
 
-#remove-tag-filter > img {
-    height: 24px;
+.active-remove {
+    background-color: var(--main-color);
+    color: var(--light-grey)
+}
+
+.inactive-remove {
+    background-color: var(--dark-text);
+    color: var(--dark-grey);
+    cursor: default;
+}
+
+.inactive-remove:hover {
+    -webkit-box-shadow: 0 0 0px var(--main-color);
+    -moz-box-shadow: 0 0 0px var(--main-color);
+    box-shadow: 0 0 0px var(--main-color);
+}
+
+@media (min-width: 0px) and (max-width: 850px) {
+    .filter-container {
+        grid-template-columns: 100%;
+        width: 100%;
+        min-width: 275px;
+    }
+
+    .filter-btn {
+        height: 45px;
+        width: 45px;
+    }
+
+    .filter-tags-container {
+        grid-template-columns: 100%;
+    }
+
+    .tag-select {
+        height: auto;
+        justify-content: center;
+        width: 100%;
+        padding: 10px;
+    }
+    .tag-select-text {
+        margin-top: 15px;
+        text-align: center;
+        padding: 0px;
+        font-weight: bold;
+    }
 }
 </style>

@@ -149,8 +149,13 @@ export default defineComponent({
   width: 60%;
 }
 
+// Temporary formatting fix for filters, ideally headings will be soon redone
+.title-desc {
+  padding-bottom: 0px;
+}
+
 @media (min-width: 0px) and (max-width: 850px) {
-  .project-container {
+  .project-container, .tag-sort-container {
     width: 80%;
   }
 }
