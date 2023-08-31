@@ -1,0 +1,15 @@
+name: Main CI
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+jobs:
+  build-main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+  lint-main:
+    uses: ./.github/workflows/lint.yml
+  deploy-main:
+    needs: lint
+    uses: ./.github/workflows/deploy.yml

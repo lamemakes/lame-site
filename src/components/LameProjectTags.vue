@@ -1,17 +1,22 @@
 <template>
-  <div
-    v-for="tag in tags"
-    :key="tag"
-    class="tag"
-    :class="SUPPORTED_TAGS.includes(tag) ? tag.replace(' ', '-') : 'other'"
-  >
-    <p>{{ tag }}</p>
-    <!-- Adding the applicable emoji to the tag -->
+  <div class="tag-container">
+    <div
+      v-for="tag in tagsIn"
+      :key="tag"
+      class="tag"
+      :class="tagUtils.getTagClass(route, tag)"
+      @click.prevent="router.push({ path: '/projects', query: { tags: tag.replace(' ', '-')}})"
+    >
+      <p>{{ tag }}</p>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import SUPPORTED_TAGS from "../constants/tags";
+import tagUtils from "../utils/tags";
+import { useRouter, useRoute } from "vue-router";
 import type { PropType } from "vue";
 
 export default defineComponent({
@@ -23,22 +28,14 @@ export default defineComponent({
   },
   setup(props) {
     const tagsIn = ref(props.tags);
-    const SUPPORTED_TAGS = [
-      "researching project",
-      "ongoing project",
-      "completed project",
-      "scrapped project",
-      "hardware",
-      "software",
-      "art",
-      "rant"
-    ];
+    const router = useRouter();
+    const route = useRoute();
 
     // Sometimes tag arrays come in that are empty strings (or if they're too long for some reason), filter them out.
     const TAG_MAX_LEN = 20;
     if (tagsIn.value.length > 0) {
       tagsIn.value = tagsIn.value.filter(
-        (tag) => tag != "" && tag.length <= TAG_MAX_LEN
+        (tag) => tag && tag.length <= TAG_MAX_LEN
       );
     }
 
@@ -55,63 +52,16 @@ export default defineComponent({
 
     tagsIn.value.sort(sortTags);
 
-    return { tagsIn, SUPPORTED_TAGS };
+    console.error("FINAL TAGS")
+    console.error(tagsIn.value)
+
+    return { tagsIn, SUPPORTED_TAGS, router, route, tagUtils };
   },
 });
 </script>
 
-<style scoped lang="scss">
-.tag {
-  height: 15px;
-  width: fit-content;
-  border-radius: 15px;
-  padding: 12px;
+<style scoped lang="css">
+.tag-container {
   display: flex;
-  align-items: center;
-  margin: 4px;
-  color: rgb(96, 96, 96);
-  font-size: 14px;
-  font-weight: bold;
-  p {
-    white-space: nowrap;
-  }
-}
-
-.completed-project {
-  background-color: #6feb96;
-  -webkit-box-shadow: 0 0 20px var(--main-color);
-  -moz-box-shadow: 0 0 20px var(--main-color);
-  box-shadow: 0 0 20px var(--main-color);
-}
-
-.ongoing-project {
-  background-color: #ffb566;
-}
-
-.researching-project {
-  background-color: #7066ff;
-}
-
-.scrapped-project {
-  background-color: #ff4d4d;
-}
-.hardware {
-  background-color: #667aff;
-}
-
-.software {
-  background-color: #d466ff;
-}
-
-.art {
-  background-color: #ff668c;
-}
-
-.rant {
-  background-color: #c66f92;
-}
-
-.other {
-  background-color: #66c9ff;
 }
 </style>

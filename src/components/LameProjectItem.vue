@@ -102,7 +102,7 @@ a:visited {
     object-fit: cover;
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: var(--app-border-rad);
   }
 }
 
@@ -140,6 +140,7 @@ a:visited {
   flex-direction: row;
   margin-top: 5px;
   flex-wrap: wrap;
+  z-index: 5;
 }
 
 @media (min-width: 0px) and (max-width: 850px) {

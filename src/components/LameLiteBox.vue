@@ -95,7 +95,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   width: 60%;
-  background-color: rgba(43, 43, 43, 0.9);
+  background-color: var(--dark-grey);
   border: solid 2px rgba(66, 185, 131, 1);
   max-height: 80%;
   padding-top: 20px;

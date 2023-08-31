@@ -115,7 +115,7 @@ export default defineComponent({
     text-align: center;
     width: 210px;
     height: 20px;
-    border-radius: 20px;
+    border-radius: var(--app-border-rad);
     background-color: var(--main-color);
     border: none;
     .prev-btn-img {
