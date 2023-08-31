@@ -17,7 +17,7 @@ export default defineComponent({
 <style scoped lang="scss">
 #not-found {
   height: 100%;
-  background-image: url("@/assets/background/Desktop_404.webp");
+  background-image: url("https://lamemakes.com/imgs/Desktop_404.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -27,7 +27,7 @@ export default defineComponent({
 
 @media (min-width: 0px) and (max-width: 850px) {
   #not-found {
-    background-image: url("@/assets/background/Mobile_404.webp");
+    background-image: url("https://lamemakes.com/imgs/Mobile_404.webp");
   }
 }
 </style>
