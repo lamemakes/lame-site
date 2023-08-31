@@ -5,9 +5,9 @@ on:
       - main
     workflow_dispatch:
 jobs:
-  build:
+  build-branch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-  lint:
+  lint-branch:
     uses: ./.github/workflows/lint.yml

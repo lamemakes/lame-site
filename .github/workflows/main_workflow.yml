@@ -4,12 +4,12 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 jobs:
-  build:
+  build-main:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-  lint:
+  lint-main:
     uses: ./.github/workflows/lint.yml
-  deploy:
+  deploy-main:
     needs: lint
     uses: ./.github/workflows/deploy.yml
