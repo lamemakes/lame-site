@@ -52,9 +52,6 @@ export default defineComponent({
 
     tagsIn.value.sort(sortTags);
 
-    console.error("FINAL TAGS")
-    console.error(tagsIn.value)
-
     return { tagsIn, SUPPORTED_TAGS, router, route, tagUtils };
   },
 });

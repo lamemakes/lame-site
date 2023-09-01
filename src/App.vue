@@ -142,7 +142,7 @@ header {
     }
   }
   
-  .glow, .tag:hover{
+  .glow {
     -webkit-box-shadow: 0 0 20px var(--main-color);
     -moz-box-shadow: 0 0 20px var(--main-color);
     box-shadow: 0 0 20px var(--main-color);
@@ -193,6 +193,14 @@ header {
   .list-item {
     /* text-indent: -12px; */
     padding-left: 20px;
+  }
+}
+
+@media (min-width: 850px) {
+  .tag:hover{
+    -webkit-box-shadow: 0 0 20px var(--main-color);
+    -moz-box-shadow: 0 0 20px var(--main-color);
+    box-shadow: 0 0 20px var(--main-color);
   }
 }
 </style>

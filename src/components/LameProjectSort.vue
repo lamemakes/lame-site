@@ -180,6 +180,10 @@ export default defineComponent({
         width: 45px;
     }
 
+    .filter-btn:hover {
+        background-color: var(--dark-grey);
+    }
+
     .filter-tags-container {
         grid-template-columns: 100%;
     }
