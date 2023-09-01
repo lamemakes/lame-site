@@ -25,16 +25,6 @@ jobs:
     - name: Build lame-site
       run: yarn build
 
-    - name: Replace old assets
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: lamemakes.com
-        username: ${{ secrets.LAME_SITE_SSH_USERNAME }}
-        key: ${{ secrets.LAME_SITE_SSH_KEY }}
-        passphrase: ${{ secrets.LAME_SITE_SSH_KEY_PASS }}
-        port: ${{ secrets.LAME_SITE_SSH_PORT }}
-        script: rm -rf ${{ secrets.LAME_SITE_ASSET_PATH }}/assets/*
-
     - name: Deploy lame-site assets
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:

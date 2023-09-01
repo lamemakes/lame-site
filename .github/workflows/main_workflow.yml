@@ -11,5 +11,6 @@ jobs:
   lint-main:
     uses: ./.github/workflows/lint.yml
   deploy-main:
-    needs: lint
+    needs: lint-main
     uses: ./.github/workflows/deploy.yml
+    secrets: inherit
