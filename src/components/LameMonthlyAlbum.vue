@@ -21,9 +21,23 @@
     ></div>
     <div id="prev-container">
       <TransitionGroup>
-        <button id="show-prev-btn" @click="prevExpanded = ! prevExpanded">
-          <img class="prev-btn-img" v-if="prevExpanded" src="@/assets/buttons/expand-more.png">
-          <img class="prev-btn-img" v-if="!prevExpanded" src="@/assets/buttons/chevron-right.png">
+        <button 
+          id="show-prev-btn"
+          @click="prevExpanded = ! prevExpanded"
+          :title="prevExpanded ? 'show previous albums' : 'hide previous albums'"
+        >
+          <img
+            v-if="prevExpanded"
+            class="prev-btn-img"
+            src="@/assets/buttons/expand-more.png"
+            alt="chevron pointing down"
+          >
+          <img
+            v-if="!prevExpanded"
+            class="prev-btn-img"
+            src="@/assets/buttons/chevron-right.png"
+            alt="chevron pointing right"
+          >
           <span>Previous Albums of the Month</span>
         </button>
         <div id="prev-list" v-if="prevExpanded">
@@ -118,6 +132,7 @@ export default defineComponent({
     border-radius: var(--app-border-rad);
     background-color: var(--main-color);
     border: none;
+    cursor: pointer;
     .prev-btn-img {
       width: 20px;
       height: 20px;

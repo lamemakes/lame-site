@@ -2,8 +2,16 @@
   <div class="project-page">
     <div class="project-display lame-box">
       <div id="project-heading">
-        <router-link :to="{ name: 'projects' }" id="project-back">
-          <img src="@/assets/buttons/back.png" />
+        <router-link 
+          :to="{ name: 'projects' }" 
+          id="project-back"
+          title="return to projects"
+
+        >
+          <img
+            src="@/assets/buttons/back.png"
+            alt="arrow pointing left"
+          >
         </router-link>
         <div id="project-title">
           <h1 class="heading" id="project-name">{{ projectIn.name }}</h1>
@@ -28,7 +36,11 @@
           >
             <a :href="link.url" target="_blank" class="link-item">
               <div class="link-icon-container">
-                <img :src="getLinkIcon(link.type)" class="link-icon" />
+                <img
+                  :src="getLinkIcon(link.type)"
+                  class="link-icon"
+                  :alt="`${link.title} icon`"
+                >
               </div>
               <span class="link-title">{{ link.title }}</span>
             </a>

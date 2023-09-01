@@ -1,27 +1,54 @@
 <template>
   <div v-if="openLiteBox" id="lite-box" class="lame-box">
-    <div @click="closeLiteBox()" id="close-lite-box" class="nav-btn">
-      <img src="@/assets/buttons/close.png" />
+    <div
+      id="close-lite-box"
+      class="nav-btn"
+      tabindex="1"
+      role="button"
+      @click="closeLiteBox()"
+      @keydown.enter.prevent="closeLiteBox()"
+      @keydown.space.prevent="closeLiteBox()"
+    >
+      <img
+        src="@/assets/buttons/close.png"
+        alt="close lite box icon"
+      />
     </div>
     <div class="gallery-nav">
       <div id="nav-container">
         <div
           id="prev-pic"
           v-if="0 < imageIndex"
+          tabindex="1"
+          role="button"
           @click="imgNav(-1)"
+          @keydown.enter.prevent="imgNav(-1)"
+          @keydown.space.prevent="imgNav(-1)"
           class="nav-btn"
         >
-          <img src="@/assets/buttons/prev.png" />
+          <img
+            src="@/assets/buttons/prev.png"
+            alt="previous image"
+            title="previous image"
+          />
         </div>
       </div>
       <div id="nav-container">
         <div
           v-if="imageArrayIn.length > imageIndex + 1"
           id="next-pic"
+          tabindex="1"
+          role="button"
           @click="imgNav(1)"
+          @keydown.enter.prevent="imgNav(1)"
+          @keydown.space.prevent="imgNav(1)"
           class="nav-btn"
         >
-          <img src="@/assets/buttons/next.png" />
+          <img
+            src="@/assets/buttons/next.png"
+            alt="next image"
+            title="next image"
+          />
         </div>
       </div>
     </div>

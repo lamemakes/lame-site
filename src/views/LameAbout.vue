@@ -7,7 +7,11 @@
     </div>
     <div v-if="about" id="about-info" class="lame-box">
       <div class="img-container">
-        <LameImage :imageUrl="about.me" :thumbnail="true" />
+        <LameImage
+          :imageUrl="about.me"
+          :thumbnail="true"
+          altText="Wesley Appler Portrait"
+        />
       </div>
       <div id="about-me" v-html="about.desc"></div>
     </div>
