@@ -48,19 +48,16 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute();
 
+    const prevTags = ref([] as string[])
     const activeTags = ref([] as string[])
 
     const populateTags = () => {
         activeTags.value = tagUtils.queryToTags(route)
-        console.error("ACTIVE TAGS")
-        console.error(activeTags.value)
     }
 
     populateTags()
 
     const toggleTag = (tag: string) => {
-        console.error("TOGGLE TAG")
-        console.error(tag)
         if (activeTags.value.includes(tag)) {
             if (activeTags.value.length > 1) {
                 router.push({ path: '/projects', query: { tags: activeTags.value.filter((activeTag) => activeTag !== tag) }})
@@ -78,7 +75,13 @@ export default defineComponent({
     watch(
       route,
       () => {
+        prevTags.value = activeTags.value
         populateTags()
+        // If the active tags value goes from an empty array to a populated one, open the filtering menu.
+        // ie. Filter menu is closed and a tag was clicked on a project item
+        if (prevTags.value.length === 0 && activeTags.value.length > 0) {
+            menuOpen.value = true
+        }
       },
       { flush: "pre", immediate: true, deep: true }
     );
