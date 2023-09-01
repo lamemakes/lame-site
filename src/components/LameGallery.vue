@@ -10,9 +10,17 @@
       <div
         v-for="(image, index) in imageArray"
         :key="image.url"
+        tabindex="0"
+        role="button"
         @click="selectImg(index)"
+        @keydown.enter.prevent="selectImg(index)"
+        @keydown.space.prevent="selectImg(index)"
       >
-        <LameImage :imageUrl="image.url" :thumbnail="true" />
+        <LameImage
+          :imageUrl="image.url"
+          alt-text="'visual art thumbnail'"
+          :thumbnail="true"
+        />
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <img :src="imageUrl" />
+  <img :src="imageUrl" :alt="$props.altText" />
 </template>
 
 <script lang="ts">
@@ -18,6 +18,10 @@ export default defineComponent({
       required: false,
       default: false,
     },
+    altText: {
+      type: String,
+      required: false
+    }
   },
   setup(props) {
     const inImageUrl = toRef(props, "imageUrl");

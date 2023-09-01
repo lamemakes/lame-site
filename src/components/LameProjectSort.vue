@@ -2,11 +2,19 @@
     <div class="filter-container">
         <div
             class="filter-btn"
+            tabindex="0"
+            role="button"
             @click="menuOpen = !menuOpen"
+            @keydown.enter.prevent="menuOpen = !menuOpen"
+            @keydown.space.prevent="menuOpen = !menuOpen"
             :class="menuOpen ? 'filter-btn-active' : ''"
             title="filter by tags"
         >
-            <img id="filter-btn-img" src="@/assets/buttons/filter.png" />
+            <img
+                id="filter-btn-img"
+                src="@/assets/buttons/filter.png"
+                alt="filter icon"
+            />
         </div>
         <div 
             v-if="menuOpen"
@@ -19,7 +27,11 @@
                     :key="tag"
                     class="tag"
                     :class="tagUtils.getTagClass(route, tag)"
+                    tabindex="0"
+                    role="button"
                     @click="toggleTag(tag.replace(' ', '-'))"
+                    @keydown.enter.prevent="toggleTag(tag.replace(' ', '-'))"
+                    @keydown.space.prevent="toggleTag(tag.replace(' ', '-'))"
                 >
                     <p>{{ tag }}</p>
                 </div>
@@ -29,7 +41,11 @@
                 class="tag"
                 :class="!route.query.tags ? 'inactive-remove' : 'active-remove'"
                 id="remove-tag-filter"
+                tabindex="0"
+                role="button"
                 @click="router.push({ path: '/projects' })"
+                @keydown.enter.prevent="router.push({ path: '/projects' })"
+                @keydown.space.prevent="router.push({ path: '/projects' })"
             >
                 clear
             </div>

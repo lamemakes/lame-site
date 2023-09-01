@@ -9,6 +9,7 @@
           v-if="projectIn.images"
           :imageUrl="projectIn.images[projectIn.coverImageIndex].url"
           :thumbnail="true"
+          :altText="`${projectIn.name} thumbnail`"
         />
       </div>
     </div>

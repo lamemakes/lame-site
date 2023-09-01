@@ -5,7 +5,11 @@
       :key="tag"
       class="tag"
       :class="tagUtils.getTagClass(route, tag)"
-      @click.prevent="router.push({ path: '/projects', query: { tags: tag.replace(' ', '-')}})"
+      tabindex="0"
+      role="button"
+      @click.prevent="routerFilterByButton(tag)"
+      @keydown.enter.prevent="routerFilterByButton(tag)"
+      @keydown.space.prevent="routerFilterByButton(tag)"
     >
       <p>{{ tag }}</p>
     </div>
@@ -50,9 +54,13 @@ export default defineComponent({
       }
     };
 
+    const routerFilterByButton = (tag: string) => {
+      router.push({ path: '/projects', query: { tags: tag.replace(' ', '-')}})
+    }
+
     tagsIn.value.sort(sortTags);
 
-    return { tagsIn, SUPPORTED_TAGS, router, route, tagUtils };
+    return { tagsIn, SUPPORTED_TAGS, router, route, tagUtils, routerFilterByButton };
   },
 });
 </script>
