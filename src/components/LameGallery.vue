@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="gallery-root">
     <LameLiteBox
       id="lite-box"
       v-if="openLiteBox"
@@ -60,6 +60,11 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+#gallery-root {
+  display: flex;
+  justify-content: center;
+}
+
 #gallery {
   line-height: 0;
   -webkit-column-count: 3; /* split it into 2 columns */
