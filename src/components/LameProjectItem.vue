@@ -86,10 +86,6 @@ a {
   align-items: center;
 }
 
-a:hover {
-  background-color: rgba(153, 153, 153, 0.8);
-}
-
 a:visited {
   color: var(--main-color);
 }
@@ -173,6 +169,12 @@ a:visited {
 
   #tags-container {
     justify-content: center;
+  }
+}
+
+@media (min-width: 850px) {
+  a:hover {
+    background-color: rgba(153, 153, 153, 0.8);
   }
 }
 </style>

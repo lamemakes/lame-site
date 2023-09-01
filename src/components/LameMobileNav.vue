@@ -106,8 +106,7 @@ li {
 }
 
 li.router-link-active,
-li.router-link-exact-active,
-li:hover {
+li.router-link-exact-active {
   background-color: #444;
   border-bottom-color: #ff5858;
 }

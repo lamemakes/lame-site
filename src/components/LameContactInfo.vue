@@ -66,11 +66,6 @@ export default defineComponent({
   margin: 20px;
 }
 
-.contact-btn:hover {
-  -webkit-filter: invert(100%);
-  filter: invert(100%);
-}
-
 .contact-btn > img {
   display: inline;
   width: 50%;
@@ -89,6 +84,13 @@ export default defineComponent({
     width: 75px;
     height: 75px;
     margin: 5px;
+  }
+}
+
+@media (min-width: 850px) {
+  .contact-btn:hover {
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
   }
 }
 
