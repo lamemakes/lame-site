@@ -124,10 +124,6 @@ export default defineComponent({
     border-radius: 50% 50% 0 0;
 }
 
-.filter-btn:hover {
-    background-color: var(--opaque-light-grey);
-}
-
 .tag-select {
     display: flex;
     width: 90%;
@@ -162,12 +158,6 @@ export default defineComponent({
     cursor: default;
 }
 
-.inactive-remove:hover {
-    -webkit-box-shadow: 0 0 0px var(--main-color);
-    -moz-box-shadow: 0 0 0px var(--main-color);
-    box-shadow: 0 0 0px var(--main-color);
-}
-
 @media (min-width: 0px) and (max-width: 850px) {
     .filter-container {
         grid-template-columns: 100%;
@@ -178,10 +168,6 @@ export default defineComponent({
     .filter-btn {
         height: 45px;
         width: 45px;
-    }
-
-    .filter-btn:hover {
-        background-color: var(--dark-grey);
     }
 
     .filter-tags-container {
@@ -199,6 +185,18 @@ export default defineComponent({
         text-align: center;
         padding: 0px;
         font-weight: bold;
+    }
+}
+
+@media (min-width: 850px) {
+    .filter-btn:hover {
+        background-color: var(--opaque-light-grey);
+    }
+
+    .inactive-remove:hover {
+        -webkit-box-shadow: 0 0 0px var(--main-color);
+        -moz-box-shadow: 0 0 0px var(--main-color);
+        box-shadow: 0 0 0px var(--main-color);
     }
 }
 </style>
