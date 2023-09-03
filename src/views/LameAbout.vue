@@ -61,7 +61,6 @@ export default defineComponent({
 <style scoped lang="scss">
 .about-page {
   display: grid;
-  grid-template-rows: 100%;
 }
 
 .about-info {
