@@ -186,7 +186,7 @@ export default defineComponent({
 // Format URLs
 :deep(a) {
   text-decoration: none;
-  color: #fb8b37;
+  color: var(--link-color);
 }
 
 :deep(a):hover {
