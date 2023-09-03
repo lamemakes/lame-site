@@ -1,9 +1,7 @@
 <template>
     <div class="filter-container">
-        <div
+        <button
             class="filter-btn"
-            tabindex="0"
-            role="button"
             @click="menuOpen = !menuOpen"
             @keydown.enter.prevent="menuOpen = !menuOpen"
             @keydown.space.prevent="menuOpen = !menuOpen"
@@ -15,40 +13,36 @@
                 src="@/assets/buttons/filter.png"
                 alt="filter icon"
             />
-        </div>
+        </button>
         <div 
             v-if="menuOpen"
             class="filter-tags-container"
         >
             <span class="tag-select-text">tags</span>
             <div class="active-tags tag-select">
-                <div
+                <button
                     v-for="tag in SUPPORTED_TAGS"
                     :key="tag"
                     class="tag"
                     :class="tagUtils.getTagClass(route, tag)"
-                    tabindex="0"
-                    role="button"
                     @click="toggleTag(tag.replace(' ', '-'))"
                     @keydown.enter.prevent="toggleTag(tag.replace(' ', '-'))"
                     @keydown.space.prevent="toggleTag(tag.replace(' ', '-'))"
                 >
                     <p>{{ tag }}</p>
-                </div>
+            </button>
             </div>
             <div></div>
-            <div
+            <button
                 class="tag"
                 :class="!route.query.tags ? 'inactive-remove' : 'active-remove'"
                 id="remove-tag-filter"
-                tabindex="0"
-                role="button"
                 @click="router.push({ path: '/projects' })"
                 @keydown.enter.prevent="router.push({ path: '/projects' })"
                 @keydown.space.prevent="router.push({ path: '/projects' })"
             >
                 clear
-            </div>
+        </button>
         </div>
     </div>
 </template>
@@ -168,11 +162,11 @@ export default defineComponent({
 
 .active-remove {
     background-color: var(--main-color);
-    color: var(--light-grey)
+    color: var(--dark-grey)
 }
 
 .inactive-remove {
-    background-color: var(--dark-text);
+    background-color: var(--light-grey);
     color: var(--dark-grey);
     cursor: default;
 }

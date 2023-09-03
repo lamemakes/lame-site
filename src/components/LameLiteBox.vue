@@ -1,10 +1,9 @@
 <template>
   <div v-if="openLiteBox" id="lite-box" class="lame-box">
-    <div
+    <button
       id="close-lite-box"
       class="nav-btn"
       tabindex="1"
-      role="button"
       @click="closeLiteBox()"
       @keydown.enter.prevent="closeLiteBox()"
       @keydown.space.prevent="closeLiteBox()"
@@ -13,14 +12,13 @@
         src="@/assets/buttons/close.png"
         alt="close lite box icon"
       />
-    </div>
+  </button>
     <div class="gallery-nav">
       <div id="nav-container">
-        <div
+        <button
           id="prev-pic"
           v-if="0 < imageIndex"
           tabindex="1"
-          role="button"
           @click="imgNav(-1)"
           @keydown.enter.prevent="imgNav(-1)"
           @keydown.space.prevent="imgNav(-1)"
@@ -31,14 +29,13 @@
             alt="previous image"
             title="previous image"
           />
-        </div>
+      </button>
       </div>
       <div id="nav-container">
-        <div
+        <button
           v-if="imageArrayIn.length > imageIndex + 1"
           id="next-pic"
           tabindex="1"
-          role="button"
           @click="imgNav(1)"
           @keydown.enter.prevent="imgNav(1)"
           @keydown.space.prevent="imgNav(1)"
@@ -49,11 +46,13 @@
             alt="next image"
             title="next image"
           />
-        </div>
+        </button>
       </div>
     </div>
     <div id="main-img">
-      <LameImage :imageUrl="imageArray[imageIndex].url" />
+      <LameImage
+        :imageUrl="imageArray[imageIndex].url"
+      />
     </div>
     <!-- TODO: Why two divs? -->
     <div v-if="imageArray[imageIndex].caption" id="pic-caption">

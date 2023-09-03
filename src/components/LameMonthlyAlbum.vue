@@ -38,7 +38,7 @@
             src="@/assets/buttons/chevron-right.png"
             alt="chevron pointing right"
           >
-          <span>Previous Albums of the Month</span>
+          <p>Previous Albums of the Month</p>
         </button>
         <div id="prev-list" v-if="prevExpanded">
           <div v-for="album in albumOfTheMonth.previous" :key="album.name" class="prev-album">
@@ -127,16 +127,21 @@ export default defineComponent({
     justify-items: center;
     align-content: center;
     text-align: center;
-    width: 210px;
-    height: 20px;
+    width: 250px;
+    height: 25px;
     border-radius: var(--app-border-rad);
     background-color: var(--main-color);
+    color: var(--dark-grey);
     border: none;
     cursor: pointer;
     .prev-btn-img {
+      margin-top: 2px;
       width: 20px;
       height: 20px;
-    } 
+    }
+    p {
+      margin-top: 4px;
+    }
   }
 
   #prev-list{
