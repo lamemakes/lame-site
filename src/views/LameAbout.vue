@@ -2,18 +2,33 @@
   <div class="about-page">
     <div class="title-desc">
       <h1 class="heading">
-        What <i><u>is</u></i> lame?
+        About
       </h1>
     </div>
-    <div v-if="about" id="about-info" class="lame-box">
-      <div class="img-container">
+    <div v-if="about" class="about-info lame-box">
+      <p class="sub-heading">
+        Who's lame?
+      </p>
+      <div id="about-wes-container">
         <LameImage
+          id="lame-portrait"
           :imageUrl="about.me"
           :thumbnail="true"
           altText="Wesley Appler Portrait"
         />
+        <span id="about-wes" v-html="about.desc"></span>
       </div>
-      <div id="about-me" v-html="about.desc"></div>
+    </div>
+    <div id="accessibility-statement" class="about-info lame-box">
+      <p class="sub-heading">
+        Accessibility Statement
+      </p>
+      <p class="acc-text">
+        While I've attempted to make this website as accessible as possible, 
+        I realize there are likely many short comings. If there's anything you 
+        believe could be improved, feel free to send me an email at
+        <a href="mailto: wes@lamemakes.com">wes@lamemakes.com</a>.
+      </p>
     </div>
     <div class="contact-info">
       <LameContactInfo />
@@ -49,30 +64,26 @@ export default defineComponent({
   grid-template-rows: 8% 82% 10%;
 }
 
-#about-info {
-  display: grid;
-  grid-template-columns: 30% 70%;
-  width: 50%;
+.about-info {
+  width: 750px;
   justify-self: center;
-  text-align: left;
-  padding: 40px;
+  padding: 20px;
+  // font-size: 18px;
 }
 
-#about-me {
-  margin-top: 2%;
-  padding-left: 15px;
-  font-size: 20px;
-}
 
-.img-container {
-  display: flex;
-  align-items: center;
-  img {
-    object-fit: cover;
-    height: 100%;
-    max-width: 100%;
-    border-radius: var(--app-border-rad)
+#about-wes {
+  :deep(p) {
+    //font-size: 16px;
+    text-align: left;
   }
+}
+
+#lame-portrait {
+  width: 25%;
+  float: right;
+  margin-left: 10px;
+  border-radius: var(--app-border-rad)
 }
 
 @media (min-width: 0px) and (max-width: 850px) {
@@ -102,10 +113,14 @@ export default defineComponent({
 }
 
 @media (min-width: 0px) and (max-width: 500px) {
-  #about-info {
-    grid-template-columns: 100%;
+  .about-info {
     width: 80%;
-    text-align: left;
+  }
+
+  #lame-portrait {
+    width: 50%;
+    float: none;
+    margin: 0px 0px 10px 0px
   }
 }
 </style>

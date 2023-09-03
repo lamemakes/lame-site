@@ -6,6 +6,9 @@
     </header>
     <div id="main-view">
       <router-view />
+      <footer>
+        <p>© {{ new Date().getFullYear() }} lamemakes</p>
+      </footer>
     </div>
   </div>
 </template>
@@ -73,6 +76,11 @@ nav {
   }
 }
 
+a {
+  text-decoration: none;
+  color: var(--link-color);
+}
+
 header {
   min-height: 70px;
   height: 7vh;
@@ -121,8 +129,10 @@ button {
 }
 
 .sub-heading {
-  font-size: 30px;
+  font-size: 25px;
   color: var(--main-color);
+  font-weight: bold;
+  padding-bottom: 10px;
 }
 
 // The styling for the partly transparent grey box container:

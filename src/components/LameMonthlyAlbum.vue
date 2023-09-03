@@ -84,13 +84,11 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .album-container {
-  padding: 20px;
-  padding-top: 15px;
+  padding: 15px 20px 20px 20px;
   width: 100%;
   display: grid;
   justify-items: center;
   #month-title {
-    font-size: 25px;
     padding: 10px;
     #lame-name {
       display: inline;

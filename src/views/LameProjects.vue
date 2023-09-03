@@ -17,7 +17,7 @@
         :key="project.id"
         class="project-container"
       >
-        <LameProjectMenuItem id="project-item" :project="project" />
+        <LameProjectMenuItem :project="project" />
       </div>
     </div>
   </div>
