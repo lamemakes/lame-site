@@ -81,6 +81,15 @@ header {
   padding: 15px;
 }
 
+button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+}
+
 #main-view {
   // Implemented for Safari to prevent overscrolling. Doesn't play nice with the site.
   height: 100vh;
@@ -164,7 +173,7 @@ header {
     background-color: #ff4d4d;
   }
   .hardware-tag {
-    background-color: #667aff;
+    background-color: #7188fd;
   }
   
   .software-tag {

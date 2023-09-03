@@ -1,18 +1,16 @@
 <template>
   <div class="tag-container">
-    <div
+    <button
       v-for="tag in tagsIn"
       :key="tag"
       class="tag"
       :class="tagUtils.getTagClass(route, tag)"
-      tabindex="0"
-      role="button"
       @click.prevent="routerFilterByButton(tag)"
       @keydown.enter.prevent="routerFilterByButton(tag)"
       @keydown.space.prevent="routerFilterByButton(tag)"
     >
       <p>{{ tag }}</p>
-    </div>
+    </button>
   </div>
 </template>
 
