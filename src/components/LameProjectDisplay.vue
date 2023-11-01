@@ -37,7 +37,7 @@
             <a :href="link.url" target="_blank" class="link-item">
               <div class="link-icon-container">
                 <img
-                  :src="getLinkIcon(link.type)"
+                  :src="getLinkIcon(link.linkType)"
                   class="link-icon"
                   :alt="`${link.title} icon`"
                 >
@@ -112,7 +112,7 @@ export default defineComponent({
       typeof projectIn.value.hackaday.id === "string" &&
       projectIn.value.links.filter(
         (link) =>
-          link.type === "hackaday" &&
+          link.linkType === "hackaday" &&
           link.url === hackadayProjectUrl + projectIn.value.hackaday.id
       ).length === 0
     ) {
