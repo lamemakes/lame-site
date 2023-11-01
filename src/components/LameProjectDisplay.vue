@@ -118,7 +118,7 @@ export default defineComponent({
     ) {
       projectIn.value.links.push({
         title: projectIn.value.name + " on Hackaday.io",
-        type: "hackaday",
+        linkType: "hackaday",
         url: hackadayProjectUrl + projectIn.value.hackaday.id,
       });
     }
