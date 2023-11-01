@@ -81,7 +81,7 @@ describe("The Project Menu Display", () => {
     const links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
-        type: "github",
+        linkType: "github",
         title: "Github",
       },
     ];
@@ -97,27 +97,27 @@ describe("The Project Menu Display", () => {
     const links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
-        type: "github",
+        linkType: "github",
         title: "Github",
       },
       {
         url: "https://instagram.com/lamemakes/",
-        type: "instagram",
+        linkType: "instagram",
         title: "Instagram",
       },
       {
         url: "https://hackaday.io/",
-        type: "hackaday",
+        linkType: "hackaday",
         title: "Hackaday",
       },
       {
         url: "https://spotify.com",
-        type: "spotify", // This is not a type known by the app, so it should render a generic "internet" icon
+        linkType: "spotify", // This is not a type known by the app, so it should render a generic "internet" icon
         title: "Spotify",
       },
       {
         url: "https://duckduckgo.com",
-        type: "", // also should render a generic "internet" icon
+        linkType: "", // also should render a generic "internet" icon
         title: "DuckDuckGo",
       },
     ];
@@ -162,27 +162,27 @@ describe("The Project Menu Display", () => {
     const links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
-        type: "github",
+        linkType: "github",
         title: "Github",
       },
       {
         url: "https://instagram.com/lamemakes/",
-        type: "instagram",
+        linkType: "instagram",
         title: "Instagram",
       },
       {
         url: "https://hackaday.io/",
-        type: "hackaday",
+        linkType: "hackaday",
         title: "Hackaday",
       },
       {
         url: "https://spotify.com",
-        type: "spotify", // This is not a type known by the app, so it should render a generic "internet" icon
+        linkType: "spotify", // This is not a type known by the app, so it should render a generic "internet" icon
         title: "Spotify",
       },
       {
         url: "https://duckduckgo.com",
-        type: "", // also should render a generic "internet" icon
+        linkType: "", // also should render a generic "internet" icon
         title: "DuckDuckGo",
       },
     ];
@@ -217,12 +217,12 @@ describe("The Project Menu Display", () => {
     const links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
-        type: "github",
+        linkType: "github",
         title: "Github",
       },
       {
         url: "https://instagram.com/lamemakes/",
-        type: "instagram",
+        linkType: "instagram",
         title: "Instagram",
       },
     ];
@@ -249,17 +249,17 @@ describe("The Project Menu Display", () => {
     const links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
-        type: "github",
+        linkType: "github",
         title: "Github",
       },
       {
         url: "https://hackaday.io/project/5138009",
-        type: "hackaday",
+        linkType: "hackaday",
         title: "Hackaday",
       },
       {
         url: "https://hackaday.io/project/",
-        type: "instagram",
+        linkType: "instagram",
         title: "Instagram",
       },
     ];
@@ -286,17 +286,17 @@ describe("The Project Menu Display", () => {
     const links = [
       {
         url: "https://github.com/lamemakes/lame-site/",
-        type: "github",
+        linkType: "github",
         title: "Github",
       },
       {
         url: "https://hackaday.io/project/5138008",
-        type: "hackaday",
+        linkType: "hackaday",
         title: "Hackaday",
       },
       {
         url: "https://hackaday.io/project/",
-        type: "instagram",
+        linkType: "instagram",
         title: "Instagram",
       },
     ];
