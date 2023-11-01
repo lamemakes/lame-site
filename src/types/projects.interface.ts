@@ -18,7 +18,7 @@ export interface Project {
 
 export interface Link {
   title: string;
-  type: string;
+  linkType: string;
   url: string;
 }
 
