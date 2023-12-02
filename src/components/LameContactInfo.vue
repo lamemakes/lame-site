@@ -9,7 +9,7 @@
       :class="$props.isSmall ? 'small-btn' : 'large-btn'"
     >
       <img
-        :src="logoEndpoint + contact.name + '.png'"
+        :src="logoEndpoint + contact.name + '.webp'"
         :alt="`${contact.name} logo`"      
       />
     </a>
@@ -39,8 +39,8 @@ export default defineComponent({
         url: "https://hackaday.io/lamemakes",
       },
       {
-        name: "instagram",
-        url: "https://instagram.com/lamemakes/",
+        name: "mastodon",
+        url: "https://mastodon.social/@lamemakes",
       },
       {
         name: "email",

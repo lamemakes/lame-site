@@ -95,8 +95,9 @@ export default defineComponent({
       switch (type) {
         case "github":
         case "hackaday":
+        case "mastodon":
         case "instagram":
-          return imageEndpoint + type + ".png";
+          return imageEndpoint + type + ".webp";
         default:
           return imageEndpoint + "internet.png"; // If logo isn't a recognized type, give a default image
       }

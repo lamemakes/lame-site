@@ -101,9 +101,9 @@ describe("The Project Menu Display", () => {
         title: "Github",
       },
       {
-        url: "https://instagram.com/lamemakes/",
-        linkType: "instagram",
-        title: "Instagram",
+        url: "https://mastodon.social/@lamemakes",
+        linkType: "mastodon",
+        title: "Mastodon",
       },
       {
         url: "https://hackaday.io/",
@@ -137,7 +137,7 @@ describe("The Project Menu Display", () => {
 
     expect(renderedIcons[1].exists()).toBe(true);
     expect(renderedIcons[1].element.src).toEqual(
-      "https://lamemakes.com/imgs/logos/instagram.png"
+      "https://lamemakes.com/imgs/logos/mastodon.webp"
     );
 
     expect(renderedIcons[2].exists()).toBe(true);
@@ -166,9 +166,9 @@ describe("The Project Menu Display", () => {
         title: "Github",
       },
       {
-        url: "https://instagram.com/lamemakes/",
-        linkType: "instagram",
-        title: "Instagram",
+        url: "https://mastodon.social/@lamemakes",
+        linkType: "mastodon",
+        title: "Mastodon",
       },
       {
         url: "https://hackaday.io/",
@@ -198,7 +198,7 @@ describe("The Project Menu Display", () => {
 
     expect(renderedLinks[1].exists()).toBe(true);
     expect(renderedLinks[1].element.href).toEqual(
-      "https://instagram.com/lamemakes/"
+      "https://mastodon.social/@lamemakes"
     );
 
     expect(renderedLinks[2].exists()).toBe(true);
@@ -221,9 +221,9 @@ describe("The Project Menu Display", () => {
         title: "Github",
       },
       {
-        url: "https://instagram.com/lamemakes/",
-        linkType: "instagram",
-        title: "Instagram",
+        url: "https://mastodon.social/@lamemakes",
+        linkType: "mastodon",
+        title: "Mastodon",
       },
     ];
     const hackaday = { id: "5138008", private: false, updateFeed: false };
@@ -259,8 +259,8 @@ describe("The Project Menu Display", () => {
       },
       {
         url: "https://hackaday.io/project/",
-        linkType: "instagram",
-        title: "Instagram",
+        linkType: "mastodon",
+        title: "Mastodon",
       },
     ];
     const hackaday = { id: "5138008", private: false, updateFeed: false };
@@ -281,7 +281,7 @@ describe("The Project Menu Display", () => {
     wrapper.unmount();
   });
 
-  it("does not populates Hackaday link if specified Hackaday ID is in the links array already", () => {
+  it("does not populate Hackaday link if specified Hackaday ID is in the links array already", () => {
     const newProject = test_project.TEST_PROJECT;
     const links = [
       {
@@ -296,8 +296,8 @@ describe("The Project Menu Display", () => {
       },
       {
         url: "https://hackaday.io/project/",
-        linkType: "instagram",
-        title: "Instagram",
+        linkType: "mastodon",
+        title: "Mastodon",
       },
     ];
     const hackaday = { id: "5138008", private: false, updateFeed: false };
