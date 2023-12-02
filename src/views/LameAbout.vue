@@ -31,6 +31,7 @@
       </p>
     </div>
     <div class="contact-info">
+      <link rel="me" href="https://mastodon.social/@lamemakes">
       <LameContactInfo />
     </div>
   </div>
