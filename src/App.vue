@@ -1,6 +1,7 @@
 <template>
   <div>
     <header>
+      <link rel="me" href="https://mastodon.social/@lamemakes">
       <LameDesktopNav v-if="!mobileView" />
       <LameMobileNav v-if="mobileView" />
     </header>
