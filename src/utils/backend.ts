@@ -1,6 +1,5 @@
 // Mainly used for doing *.json pulls from the host.
 
-import type { AlbumOfTheMonthContainer } from "../types/album.interface";
 import type { Image } from "../types/image.interface";
 import type { Project } from "../types/projects.interface";
 import type { About } from "../types/about.interface";
@@ -21,23 +20,6 @@ const loadProjects = async (): Promise<Project[]> => {
   } catch (error) {
     console.error(error);
     return [];
-  }
-};
-
-const loadAlbum = async (): Promise<AlbumOfTheMonthContainer | undefined> => {
-  try {
-    const host = inject("host");
-    const albumEndpoint = host + "/music.json";
-
-    const data = await fetch(albumEndpoint);
-    if (!data.ok) {
-      throw Error("Failed to get album of the month data!");
-    }
-    const tempAlbumOfTheMonth = await data.json();
-    return tempAlbumOfTheMonth.music.albumOfTheMonth;
-  } catch (error) {
-    console.error(error);
-    return undefined;
   }
 };
 
@@ -75,7 +57,6 @@ const loadAbout = async (): Promise<About | undefined> => {
 
 const backendUtils = {
   loadProjects,
-  loadAlbum,
   loadPics,
   loadAbout,
 };

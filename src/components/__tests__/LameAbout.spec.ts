@@ -12,7 +12,7 @@ const TEST_ABOUT = {
 
 vi.spyOn(backendUtils, "loadAbout").mockResolvedValue(TEST_ABOUT);
 
-describe("The Album of the Month", () => {
+describe("The about page", () => {
   it("renders the about heading", async () => {
     const wrapper = await mount(LameAbout);
 
