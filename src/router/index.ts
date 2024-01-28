@@ -25,11 +25,6 @@ const router = createRouter({
       component: () => import("../views/LamePics.vue"),
     },
     {
-      path: "/music",
-      name: "music",
-      component: () => import("../views/LameMusic.vue"),
-    },
-    {
       path: "/404",
       name: "notFound",
       component: () => import("../views/Lame404.vue"),

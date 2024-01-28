@@ -56,7 +56,7 @@ export default defineComponent({
     // Value to determine if the side menu is open or not
     const sideClosed = ref(true);
     // Duplicate from the desktop component, populates routes
-    const ROUTES = ["projects", "pics", "music", "about"];
+    const ROUTES = ["projects", "pics", "about"];
     // Determines current route to know what to highlight in the menu
     const route = useRoute();
     const currentRoute = ref(route.name?.toString());
