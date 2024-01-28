@@ -34,7 +34,7 @@ import { useRoute } from "vue-router";
 
 export default defineComponent({
   setup() {
-    const ROUTES = ["projects", "pics", "music", "about"];
+    const ROUTES = ["projects", "pics", "about"];
 
     const route = useRoute();
     const currentRoute = ref(route.name?.toString());
