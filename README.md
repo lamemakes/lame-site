@@ -1,5 +1,7 @@
 # 🥳 LAME SITE v3 🥳
 
+**⚠️ This is no longer maintained due to a migration to [Ghost](https://docs.ghost.org/) - find the custom theme [here](https://codeberg.org/lamemakes/lame-theme) ⚠️**
+
 This is the third major iteration of the website located at https://www.lamemakes.com. The lastest version implements unit testing + linting, more dynamic loading, and cleaner formatting.
 
 The website was built with the intention of being nearly a fully static website. Previously auto-generated JSON files are fulled from the host and are used to populate different components of the site (projects, music, picture directories). Example object structures can be found in the test directory, with the name "test\_<return type>".
